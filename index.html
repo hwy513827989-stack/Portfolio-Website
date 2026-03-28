@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Minimalist</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --secondary: #757575;
+            --accent: #000000;
+            --spacing: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            padding: calc(var(--spacing) * 2) var(--spacing);
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-photo {
+            width: 80px;
+            height: 80px;
+            background: #f0f0f0; /* Placeholder color */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-info {
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 500;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .project-meta {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="your-photo.jpg" alt="Profile Photo" class="profile-photo">
+        
+        <div class="intro">
+            <h1>WENYI HE</h1>
+            <p class="contact-info">Email: wha75@sfu.ca</p>
+        </div>
+
+        <nav>
+            <a href="resume.pdf" target="_blank">View Resume</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="section-label">Selected Works</div>
+        
+        <div class="project-list">
+            <div class="project-item">
+                <div class="project-meta">Processing Game</div>
+                <div class="project-details">
+                    <h2 class="project-title">
+                        <a href="project-1.html" style="text-decoration: none; color: inherit;">Dream, Egg, and Mystery..</a>
+                    </h2>
+                    <p>Developed a three‑level game with collision, scoring, dialogue, animation, and sound. Created all visual assets and implemented core mechanics.</p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-meta">Interaction System</div>
+                <div class="project-details">
+                    <h2 class="project-title">
+                        <a href="project-2.html" style="text-decoration: none; color: inherit;">Shaman Ritual Interaction System</a>
+                    </h2>
+                    <p>Built an interaction sequence where users perform ritual steps to calm a snow mountain. Implemented click/drag interactions and condition‑based logic.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

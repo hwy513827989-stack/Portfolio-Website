@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | Minimalist</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --secondary: #757575;
+            --accent: #000000;
+            --spacing: 2rem;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: calc(var(--spacing) * 2) var(--spacing);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 3rem;
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            margin: 2rem 0;
+            background: #f9f9f9;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .video-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .video-link:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← Back to Overview</a>
+
+    <main>
+        <h1>Shaman Ritual Interaction System</h1>
+        
+        <p class="description">
+            Built an interaction sequence where users perform ritual steps to calm a snow mountain. Implemented click/drag interactions and condition‑based logic.
+        </p>
+
+        <img src="project2_image1.png" alt="Project Screenshot" class="project-image">
+
+        <div style="margin-top: 2rem;">
+            <a href="https://youtu.be/QS28fxFO2qI?si=Zzupdg40R9wq-4tR" target="_blank" class="video-link">
+                Watch Process Video on YouTube
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>
