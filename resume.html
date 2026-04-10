@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyan He - Resume</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="resume-page">
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span>Cyan He</span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="project-item"><a href="project.html">Project</a></li>
+                    <li class="about-item active"><a href="#">About</a></li>
+                    <li class="contact-item"><a href="index.html#connect-footer">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="btn-primary">Hire Me</button>
+        </header>
+
+        <section class="empty-page-hero reveal visible">
+            <div class="project-meta-sm">RESUME / CV</div>
+            <h1>About Cyan</h1>
+            <p>Full experience document and professional bio coming soon. This is a placeholder for the Resume page, which would typically contain a downloadable CV.</p>
+        </section>
+
+        <section class="connect-section reveal" id="connect-footer">
+            <h2>Let's Connect</h2>
+            <p>Always open to collaborating on projects :)</p>
+            <div class="connect-buttons">
+                <button class="btn-primary">wha75@sfu.ca</button>
+                <button class="btn-secondary">Download Resume</button>
+            </div>
+        </section>
+
+        <footer class="reveal">
+            <div class="footer-left">SIMON FRASER UNIVERSITY</div>
+            <div class="footer-links">
+                <a href="#">LINKEDIN</a>
+                <a href="#">ARTSTATION</a>
+                <a href="#">INSTAGRAM</a>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Use the same reveal script as others
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("visible");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
+</body>
+</html>
