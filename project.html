@@ -4,18 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Snow Mountain - Project</title>
-    <style>
-        /* ================= 基础变量与全局设置 ================= */
-        :root {
-            --bg-color: #ffffff;
-            --text-main: #1a1a1a;
-            --text-secondary: #666666;
-            --text-light: #999999;
-            --accent-teal: #008f9c;
-            --accent-teal-soft: rgba(0, 143, 156, 0.1);
-            --border-color: #eeeeee;
-        }
+    <link rel="stylesheet" href="style.css">
 
+    <style>
         body {
             margin: 0;
             padding: 0;
@@ -32,42 +23,6 @@
             padding: 0 40px;
         }
 
-        /* ================= 导航栏 (Header) ================= */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-
-        .logo { 
-            font-weight: 800; 
-            text-decoration: none; 
-            color: var(--text-main); 
-            font-size: 20px;
-        }
-
-        nav ul { display: flex; list-style: none; gap: 40px; margin: 0; padding: 0; }
-        nav a { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: var(--accent-teal); }
-
-        .btn-primary {
-            background: var(--text-main);
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-primary:hover { transform: scale(1.05); background: var(--accent-teal); }
-
         /* ================= Hero 区域 ================= */
         .hero-home {
             display: grid;
@@ -77,47 +32,244 @@
             padding: 100px 0;
         }
 
+        /* Project title 悬浮 - 和 Cyan He 一样 */
+        .hero-text h1 {
+            display: inline-block;
+            transform-origin: left center;
+            transition: color 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+        }
+        .hero-text h1:hover {
+            color: var(--accent-teal);
+            transform: scale(1.05) translateX(10px);
+        }
+
+        /* 描述文字悬浮变深灰 */
+        .hero-text p {
+            transition: color 0.4s ease;
+        }
+        .hero-text p:hover {
+            color: #333333;
+        }
+
+        /* ================= 图片容器 (project page 专用) ================= */
+        /* 注意：这里不设置 transform，让图片只做 scale，不 rotate，
+           因为 project page 的图片是小图网格，rotate 会很奇怪 */
         .hero-image-wrapper {
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+        .hero-image-wrapper:hover {
+            transform: scale(1.03) rotate(1deg);
+            box-shadow: 0 30px 60px rgba(0, 143, 156, 0.15);
+        }
+        .hero-image-wrapper img {
+            width: 100%;
+            display: block;
             transition: transform 0.5s ease;
         }
-        .hero-image-wrapper:hover { transform: scale(1.02); }
-        .hero-image-wrapper img { width: 100%; display: block; }
+        .hero-image-wrapper:hover img {
+            transform: none;
+        }
+
+        /* Caption 层（悬浮时出现） */
+        .hero-image-wrapper .caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.5));
+            color: white;
+            font-size: 11px;
+            letter-spacing: 2px;
+            padding: 30px 20px 16px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .hero-image-wrapper:hover .caption {
+            opacity: 1;
+        }
+
+        /* ================= Introduction 图片网格 ================= */
+        .intro-image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* 大图占两列 */
+        .intro-image-grid .img-large {
+            grid-column: span 2;
+            height: 400px;
+        }
+        .intro-image-grid .img-large img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 小图固定高度 */
+        .intro-image-grid .img-small {
+            height: 250px;
+        }
+        .intro-image-grid .img-small img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 错落进入动画 delay */
+        .intro-image-grid .hero-image-wrapper:nth-child(1) { transition-delay: 0s; }
+        .intro-image-grid .hero-image-wrapper:nth-child(2) { transition-delay: 0.15s; }
+        .intro-image-grid .hero-image-wrapper:nth-child(3) { transition-delay: 0.3s; }
 
         /* ================= Meta Info (信息栏) ================= */
         .meta-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            border: 1px solid var(--border-color);
-            border-left: none; border-right: none;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             padding: 40px 0;
             margin-bottom: 80px;
         }
-        .meta-item .label { font-size: 10px; color: var(--text-light); letter-spacing: 1.5px; margin-bottom: 8px; }
-        .meta-item .value { font-size: 15px; font-weight: 600; }
+        .meta-item .label {
+            font-size: 10px;
+            color: var(--text-light);
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+        .meta-item .value {
+            font-size: 15px;
+            font-weight: 600;
+        }
 
-        /* ================= 技术卡片 (The Solution) ================= */
+        /* ================= Introduction 标题竖线装饰 ================= */
+        .intro-title {
+            position: relative;
+            padding-left: 20px;
+        }
+        .intro-title::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 3px; height: 100%;
+            background: var(--accent-teal);
+            border-radius: 2px;
+        }
+
+        /* Introduction 正文悬浮左移 + 变色 */
+        .intro-body p {
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: default;
+        }
+        .intro-body p:hover {
+            color: #333;
+            transform: translateX(6px);
+        }
+
+        /* ================= Solution 区 (毛玻璃 + 亮光悬浮) ================= */
         .solution-section {
-            background-color: #f7f7f7;
-            padding: 100px 60px;
+            /* 灰白渐变 + 毛玻璃质感 */
+            background: linear-gradient(145deg, rgba(255,255,255,0.75) 0%, rgba(235,238,240,0.85) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 100px 80px;
             border-radius: 40px;
             text-align: center;
-            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
         }
-        .solution-section:hover { background-color: #ffffff; box-shadow: 0 40px 80px rgba(0,0,0,0.05); }
 
-        .tech-card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            transition: transform 0.4s ease;
+
+        .solution-section:hover::before {
+            left: 130%;
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* 只在 hover 时才有动画 */
         }
-        .tech-card:hover { transform: translateY(-10px); }
 
-        /* ================= 动画 (Reveal) ================= */
+        .solution-section:hover {
+            transform: scale(1.015);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255,255,255,0.8) inset;
+            border-color: rgba(255,255,255,0.9);
+        }
+
+        .solution-section .section-tag {
+            font-size: 11px;
+            color: var(--accent-teal);
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .solution-section h2 {
+            font-size: 48px !important;
+            font-weight: 800;
+            color: var(--text-main) !important;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+            transition: none !important;
+            transform: none !important;
+        }
+        .solution-section:hover h2 {
+            color: var(--text-main) !important;
+            transform: none !important;
+        }
+
+        .solution-section .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Tech Card：无白底、左对齐 */
+        .tech-card-new {
+            text-align: left;
+            padding: 10px 0;
+            transition: transform 0.3s ease;
+        }
+        .tech-card-new:hover {
+            transform: translateY(-6px);
+        }
+
+        /* 青色扁平图标方块 */
+        .tech-icon-box {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #00b8c8 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tech-icon-box svg {
+            width: 24px; height: 24px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .tech-card-new:hover .tech-icon-box {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 143, 156, 0.35);
+        }
+
+        .tech-card-new h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+        .tech-card-new p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ================= Reveal 动画 ================= */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -131,6 +283,8 @@
 </head>
 <body>
     <div class="container">
+
+        <!-- ===== Header ===== -->
         <header>
             <a href="index.html" class="logo"><span>Cyan He</span></a>
             <nav>
@@ -142,9 +296,10 @@
             </nav>
             <a href="assets/Your_Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary" style="text-decoration: none;">
                 Hire Me
-            </a>  
+            </a>
         </header>
 
+        <!-- ===== Hero: 标题 + 封面图 ===== -->
         <section class="hero-home reveal">
             <div class="hero-text">
                 <div style="font-size: 11px; color: var(--text-light); letter-spacing: 2.5px; margin-bottom: 15px;">INTERACTION SYSTEM</div>
@@ -154,10 +309,12 @@
                 </p>
             </div>
             <div class="hero-image-wrapper">
-                <img src="snow1.png" alt="Project Cover">
+                <img src="Snow1.png" alt="Project Cover">
+                <div class="caption">THE SNOW MOUNTAIN — COVER</div>
             </div>
         </section>
 
+        <!-- ===== Meta Info ===== -->
         <div class="meta-grid reveal">
             <div class="meta-item"><div class="label">ROLE</div><div class="value">Design & Development</div></div>
             <div class="meta-item"><div class="label">DATE</div><div class="value">Jan 2025</div></div>
@@ -165,13 +322,15 @@
             <div class="meta-item"><div class="label">TYPE</div><div class="value">Solo Project</div></div>
         </div>
 
+        <!-- ===== Introduction + 图片网格 ===== -->
         <section class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin: 100px 0;">
-            <div>
-                <h3 style="font-size: 32px; margin-bottom: 25px;">Introduction</h3>
+
+            <!-- 左：文字 -->
+            <div class="intro-body">
+                <h3 class="intro-title" style="font-size: 32px; margin-bottom: 25px;">Introduction</h3>
                 <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.8;">
                     I wanted users to feel like they were performing something, not just completing a task. That meant every interaction — every click, every drag — had to carry intention. No tutorials, no instructions, no UI hand-holding; just curiosity pulling them forward.
                 </p>
-
                 <p style="color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8;">
                     The ritual is translated into two interaction languages: <strong>ordered clicks</strong> for summoning (runes lighting up in sequence) and <strong>drag gestures</strong> for offering ritual objects. Together, they form a rhythm of discovery and deliberation that mirrors how real rituals unfold.
                 </p>
@@ -179,44 +338,88 @@
                     Watch Demo on YouTube ↗
                 </a>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                <div class="hero-image-wrapper" style="grid-column: span 2; height: 400px;"><img src="snow2.png" style="height:100%; object-fit:cover;"></div>
-                <div class="hero-image-wrapper" style="height: 250px;"><img src="snow3.png" style="height:100%; object-fit:cover;"></div>
-                <div class="hero-image-wrapper" style="height: 250px;"><img src="snow4.png" style="height:100%; object-fit:cover;"></div>
+
+            <!-- 右：图片网格（大图 + 两张小图） -->
+            <div class="intro-image-grid">
+                <!-- 大图，占两列 -->
+                <div class="hero-image-wrapper img-large">
+                    <img src="Snow2.png" alt="Ritual Scene">
+                    <div class="caption">RITUAL SCENE — HEAVY RAIN</div>
+                </div>
+                <!-- 小图 1 -->
+                <div class="hero-image-wrapper img-small">
+                    <img src="Snow3.png" alt="Scene Detail 1">
+                    <div class="caption">SCENE DETAIL</div>
+                </div>
+                <!-- 小图 2 -->
+                <div class="hero-image-wrapper img-small">
+                    <img src="Snow4.png" alt="Scene Detail 2">
+                    <div class="caption">SCENE DETAIL</div>
+                </div>
             </div>
+
         </section>
 
+        <!-- ===== Solution / Tech Cards (新样式) ===== -->
         <section class="solution-section reveal">
-            <div style="max-width: 700px; margin: 0 auto 60px;">
-                <h2 style="font-size: 42px; margin-bottom: 20px;">A Ritual, Translated Into Gestures</h2>
-                <p style="color: var(--text-secondary);">I broke the ritual into two interaction languages: ordered clicks and drag gestures.</p>
+            <div style="margin: 0 auto 70px;">
+                <div class="section-tag">INTERACTION SYSTEM</div>
+                <h2>A Ritual, Translated Into Gestures</h2>
+                <p class="section-desc">
+                    I broke the ritual into two interaction languages: ordered clicks for summoning (runes lighting
+                    up in sequence) and drag gestures for offering (placing ritual objects onto the mountain).
+                    Together they form a rhythm — discovery, then deliberation — that mirrors how real rituals unfold.
+                </p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left;">
-                <div class="tech-card">
-                    <div style="font-size:24px; margin-bottom:15px;">⚙️</div>
-                    <h4>Condition-Based Logic</h4>
-                    <p style="font-size:14px; color:var(--text-secondary);">Strict state-machine in Java for environmental triggers.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; text-align: left;">
+                <div class="tech-card-new">
+                    <div class="tech-icon-box">
+                        <!-- 画笔/绘画 icon -->
+                        <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                    </div>
+                    <h4>Hand-Drawn Materiality</h4>
+                    <p>Every frame, rune, and creature was illustrated in Procreate, then brought into Java. Keeping the handmade texture was non-negotiable — it's what separates a ritual from a UI.</p>
                 </div>
-                <div class="tech-card">
-                    <div style="font-size:24px; margin-bottom:15px;">✨</div>
-                    <h4>Hand-Drawn Assets</h4>
-                    <p style="font-size:14px; color:var(--text-secondary);">Hand-illustrated in Procreate for tactile materiality.</p>
+                <div class="tech-card-new">
+                    <div class="tech-icon-box">
+                        <!-- 闪电/触发 icon -->
+                        <svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h4>Condition-Based Poetics</h4>
+                    <p>The mountain responds only when gestures are performed in the right spirit — correct order, correct objects. The logic is strict, but the feedback is soft: light, sound, stillness.</p>
                 </div>
-                <div class="tech-card">
-                    <div style="font-size:24px; margin-bottom:15px;">🧩</div>
-                    <h4>Soft Feedback</h4>
-                    <p style="font-size:14px; color:var(--text-secondary);">Teaching rules organically through subtle visual cues.</p>
+                <div class="tech-card-new">
+                    <div class="tech-icon-box">
+                        <!-- 眼睛/观察 icon -->
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h4>Learning By Noticing</h4>
+                    <p>No tutorial. Users figure out what to do by watching what the mountain reacts to. The interface teaches itself through the smallest visual cues.</p>
                 </div>
             </div>
         </section>
 
-        <footer style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color); margin-top: 100px;">
+        <!-- ===== Let's Connect ===== -->
+        <section id="connect-footer" class="connect-section reveal">
+            <h2>Let's Connect</h2>
+            <p style="margin: 20px 0 40px; color: var(--text-secondary);">Always open to collaborating on projects :)</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="btn-primary">wha75@sfu.ca</button>
+                <a href="assets/Your_Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-secondary" style="text-decoration: none;">
+                    Download Resume
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== Footer ===== -->
+        <footer style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color); margin-top: 0;">
             <div>SIMON FRASER UNIVERSITY</div>
-            <div style="display: flex; gap: 30px;">
+            <div style="display: flex; gap: 20px;">
                 <a href="#" style="text-decoration: none; color: inherit;">LINKEDIN</a>
-                <a href="#" style="text-decoration: none; color: inherit;">ARTSTATION</a>
+                <a href="https://www.instagram.com/wzamgqs" target="_blank" style="text-decoration: none; color: inherit;">INSTAGRAM</a>
             </div>
         </footer>
+
     </div>
 
     <script>
