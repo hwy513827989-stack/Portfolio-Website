@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMC Pet — Project</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* =================================================================
+           project3.html — Page-specific styles
+           Global components defined in style.css.
+
+           Table of Contents
+           01. Role Grid & Cards  (.role-grid, .role-card, .role-tag)
+           02. Responsive Showcase (.responsive-showcase, .screen-*)
+           Both registered in style.css §21–22.
+           Hero scroll-on-hover registered in style.css §08
+           via .hero-image-wrapper.scroll-on-hover utility class.
+           ================================================================= */
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <a href="index.html" class="logo"><span>Cyan He</span></a>
+        <nav>
+            <ul>
+                <li class="nav-active"><a href="index.html#projects">Project</a></li>
+                <li><a href="resume.html">About</a></li>
+                <li><a href="#connect-footer">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="assets/Your_Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary" style="text-decoration: none;">Resume</a>
+    </header>
+
+    <section class="project-hero reveal">
+        <div class="hero-text">
+            <div style="font-size: 11px; color: var(--text-light); letter-spacing: 2.5px; margin-bottom: 15px; transition: color 0.3s ease; cursor: default;" onmouseover="this.style.color='#555555'" onmouseout="this.style.color='var(--text-light)'">
+                IAT 235 — WEB DESIGN &amp; DEVELOPMENT · GROUP PROJECT
+            </div>
+            <h1>CMC Pet</h1>
+            <p style="color: var(--text-secondary); margin: 30px 0; max-width: 420px; font-size: 17px; line-height: 1.7;">
+                Designed a hand-illustrated adoption platform focused on emotional accessibility and mobile responsiveness.
+            </p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="https://pages.github.sfu.ca/wha75/235_P4_CMC/" target="_blank" class="btn-primary" style="text-decoration: none;">
+                    View Live Site ↗
+                </a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper scroll-on-hover">
+            <img src="P3/P3_desktop.png" alt="CMC Pet Homepage">
+            <div class="caption">CMC PET — HOMEPAGE</div>
+        </div>
+    </section>
+
+    <div class="meta-grid reveal">
+        <div class="meta-item"><div class="label">COURSE</div><div class="value">IAT 235</div></div>
+        <div class="meta-item"><div class="label">TYPE</div><div class="value">Group Project</div></div>
+        <div class="meta-item"><div class="label">TEAM</div><div class="value">Cyan, Mia, Cater</div></div>
+        <div class="meta-item"><div class="label">DATE</div><div class="value">Dec 2025</div></div>
+        <div class="meta-item"><div class="label">TOOLS</div><div class="value">HTML, CSS, Procreate</div></div>
+    </div>
+
+    <section class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin: 0 0 120px;">
+        <div class="intro-body">
+            <div class="section-eyebrow">Problem</div>
+            <h2 class="intro-title">The Design Challenge</h2>
+            <p>
+                The course requirements called for building a functional, multi-page website. We set a higher standard: to create a platform that fosters a sense of care for the animals even before visitors click to browse.
+            </p>
+        </div>
+        <div class="intro-image-grid">
+            <div class="hero-image-wrapper img-large scroll-on-hover">
+                <img src="P3/P3_desktop2.png" alt="Pet Detail Page">
+                <div class="caption">PET DETAIL PAGE</div>
+            </div>
+            <div class="hero-image-wrapper img-small">
+                <img src="P3/P3_icon1.png" alt="Hand-drawn Icons">
+                <div class="caption">HAND-DRAWN ICON SET</div>
+            </div>
+            <div class="hero-image-wrapper img-small">
+                <img src="P3/P3_icon2.png" alt="Hand-drawn Icons">
+                <div class="caption">HAND-DRAWN ICON SET</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal" style="margin-bottom: 40px;">
+        <div class="section-eyebrow">Contribution</div>
+        <h2 class="intro-title">My Role in the Team</h2>
+    </section>
+
+    <div class="role-grid reveal">
+        <div class="role-card">
+            <div class="role-card-label">Art Direction</div>
+            <h3>Visual System</h3>
+            <p>
+                Designed and illustrated the full asset library in Procreate — logo, category icons, and preference guide icons.
+            </p>
+            <span class="role-tag">Procreate</span>
+            <span class="role-tag">Icon system</span>
+            <span class="role-tag">Brand identity</span>
+        </div>
+        <div class="role-card">
+            <div class="role-card-label">Frontend</div>
+            <h3>Layout &amp; Responsive Design</h3>
+            <p>
+                Responsible for CSS architecture design across three breakpoints (desktop, tablet, and mobile).
+            </p>
+            <span class="role-tag">CSS Grid</span>
+            <span class="role-tag">3 breakpoints</span>
+            <span class="role-tag">Media queries</span>
+        </div>
+        <div class="role-card">
+            <div class="role-card-label">Frontend + Integration</div>
+            <h3>Components &amp; Merge Lead</h3>
+            <p>Built the search bar, dropdown nav, and footer. Managed link paths across pages and coordinated branch merges throughout the project — the heaviest contributor by commit volume.</p>
+            <span class="role-tag">Navigation</span>
+            <span class="role-tag">Search bar</span>
+            <span class="role-tag">Git workflow</span>
+        </div>
+    </div>
+
+    <section class="reveal" style="margin-bottom: 40px;">
+        <div class="section-eyebrow">Process</div>
+        <h2 class="intro-title">Iteration &amp; Development</h2>
+    </section>
+
+    <div class="process-timeline reveal">
+        <div class="process-step">
+            <div class="process-step-num">V 01 — INITIAL LAYOUT</div>
+            <h3>Sketch &amp; Structure</h3>
+            <p>
+                Hand-drawn wireframes outline the layouts of the home page, category pages, and pet detail pages. The basic content hierarchy has been established.
+            </p>
+        </div>
+        <div class="process-step">
+            <div class="process-step-num">V 02 — GRID &amp; RESPONSIVE</div>
+            <h3>Multi-Breakpoint Rebuild</h3>
+            <p>Rebuilt the grid system with three explicit breakpoints after feedback on the mobile layout.</p>
+        </div>
+        <div class="process-step">
+            <div class="process-step-num">V 03 — POLISH &amp; INTEGRATION</div>
+            <h3>Art, Components &amp; Deploy</h3>
+            <p>
+                The consistent illustration style, informative icons, and well-thought-out color scheme enhance the website's functionality and provide users with a warm and inviting experience.
+            </p>
+        </div>
+    </div>
+
+    <section class="feature-section reveal" style="margin-bottom: 80px;">
+        <div style="margin: 0 auto 70px;">
+            <div class="section-tag">DESIGN SYSTEM</div>
+            <h2>Three Decisions That Made It Work</h2>
+            <p class="section-desc">
+                Illustration consistency, information-dense icons, and a deliberate colour strategy each solved a different part of the same problem: making an adoption site feel like it was built for people, not inventory.
+            </p>
+        </div>
+        <div class="tech-grid-3">
+            <div class="tech-card-new">
+                <div class="tech-icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                </div>
+                <h3>Hand-Illustrated Asset System</h3>
+                <p>Every icon, logo, and pet image was hand-illustrated in Procreate. Applied consistently across all pages, the style functions as a visual identity — it signals craft and care in a way stock assets can't.</p>
+            </div>
+            <div class="tech-card-new">
+                <div class="tech-icon-box">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <h3>Preference Guide Icons</h3>
+                <p>Pet-friendly / adult-only / solo-pet indicators let visitors self-filter at a glance, they carry compatibility information without adding UI complexity.</p>
+            </div>
+            <div class="tech-card-new">
+                <div class="tech-icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <h3>Colour &amp; Type as Emotional Framing</h3>
+                <p>Cream background, soft accent tones, and rounded type were chosen specifically to counter the clinical aesthetic of typical adoption platforms. The colour palette communicates approachability before a single word is read.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal" style="margin-bottom: 40px;">
+        <div class="section-eyebrow">Responsive Design</div>
+        <h2 class="intro-title">Three Breakpoints, One Experience</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.8; margin-top: 16px; margin-bottom: 40px;">
+            Hover each screen to scroll through the full layout.
+        </p>
+    </section>
+
+    <div class="responsive-showcase reveal">
+        <div class="screen-desktop">
+            <div class="screen-window">
+                <img src="P3/P3_desktop.png" alt="Desktop layout">
+            </div>
+            <div class="screen-label">Desktop</div>
+        </div>
+        <div class="screen-tablet">
+            <div class="screen-window">
+                <img src="P3/P3_tablet.png" alt="Tablet layout">
+            </div>
+            <div class="screen-label">Tablet</div>
+        </div>
+        <div class="screen-mobile">
+            <div class="screen-window">
+                <img src="P3/P3_mobile.png" alt="Mobile layout">
+            </div>
+            <div class="screen-label">Mobil</div>
+        </div>
+    </div>
+
+    <section class="reveal" style="margin-bottom: 40px;">
+        <div class="section-eyebrow">Feedback</div>
+        <h2 class="intro-title">Response &amp; Revision</h2>
+    </section>
+
+    <div class="feedback-card reveal">
+        <blockquote>
+            The mobile layout feels unnatural — the reflow between breakpoints isn't smooth enough.
+        </blockquote>
+        <div class="feedback-source">— IAT 235 Instructor Feedback</div>
+        <div class="feedback-change">
+            <div class="feedback-change-label">What Changed</div>
+            <p>
+                Scrapped the single media query approach and rebuilt with three explicit viewport configurations. The fix required rethinking the grid at each size rather than overriding a desktop layout. The result made each viewport feel intentional.
+            </p>
+        </div>
+    </div>
+
+    <section class="reveal" style="margin-bottom: 40px;">
+        <div class="section-eyebrow">Reflection</div>
+        <h2 class="intro-title">Takeaways</h2>
+    </section>
+
+    <div class="takeaways-grid reveal">
+        <div class="takeaway-item">
+            <div class="takeaway-num">LEARNING 01</div>
+            <h3>Responsive Is Architecture</h3>
+            <p>
+                We built mobile-first, which kept the base layout lean.            
+            </p>
+        </div>
+        <div class="takeaway-item">
+            <div class="takeaway-num">LEARNING 02</div>
+            <h3>Visual Tone Is a System</h3>
+            <p>The illustration style only worked because every touchpoint used it — logo, icons, preference guide, pet images.</p>
+        </div>
+        <div class="takeaway-item">
+            <div class="takeaway-num">IF I DID IT AGAIN — 01</div>
+            <h3>Shared CSS Before Split Branches</h3>
+            <p>Each team member wrote slightly different patterns for similar components. A shared base stylesheet agreed on before branching would have eliminated most of the merge friction.</p>
+        </div>
+        <div class="takeaway-item">
+            <div class="takeaway-num">IF I DID IT AGAIN — 02</div>
+            <h3>Standardise Testing Environment Early</h3>
+            <p>
+                Team members tested on different devices, which surfaced inconsistent results across the process. Adopting a shared responsive viewer from the start would have caught cross-device issues earlier and kept feedback consistent throughout.
+            </p>
+        </div>
+    </div>
+
+    <div class="reveal" style="text-align: center; margin-bottom: 120px;">
+        <a href="https://pages.github.sfu.ca/wha75/235_P4_CMC/" target="_blank" class="btn-primary"
+           style="text-decoration: none; padding: 14px 32px; font-size: 15px;">
+            Visit the Live Site ↗
+        </a>
+    </div>
+
+    <section id="connect-footer" class="connect-section reveal">
+        <h2>Let's Connect</h2>
+        <p style="margin: 20px 0 40px; color: var(--text-secondary);">Always open to collaborating on projects</p>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="
+                navigator.clipboard.writeText('wha75@sfu.ca');
+                this.textContent='Copied ✓';
+                setTimeout(()=>this.textContent='wha75@sfu.ca',2000)
+            ">wha75@sfu.ca</button>
+            <a href="assets/Your_Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-secondary" style="text-decoration: none;">Download Resume</a>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color); margin-top: 0;">
+        <a href="https://www.sfu.ca/" target="_blank" style="text-decoration: none; color: inherit;">SIMON FRASER UNIVERSITY</a>
+        <div style="display: flex; gap: 20px;">
+            <a href="https://www.linkedin.com/in/cyan-he-503673410/" style="text-decoration: none; color: inherit;">LINKEDIN</a>
+            <a href="https://www.instagram.com/wzamgqs" target="_blank" style="text-decoration: none; color: inherit;">INSTAGRAM</a>
+        </div>
+    </footer>
+
+</div>
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

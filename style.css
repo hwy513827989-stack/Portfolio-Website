@@ -1,0 +1,1741 @@
+/* =================================================================
+   style.css — Cyan He Portfolio
+   -----------------------------------------------------------------
+   v1.1 — Hover System Calibration (May 2026)
+
+   Changes from v1.0 (summary):
+   - Headings and links: removed scale/translate on hover, kept color
+   - Paragraphs (.intro-body p): removed hover transform entirely
+   - Logo: removed rotate, reduced scale to 1.02
+   - Images: removed rotation across all wrappers
+   - Buttons: scale 1.05 → 1.02; kept scan-light on hero only
+   - Project info h2: removed scale + translate
+   - Project hero h1: removed scale + translate
+   - CTA section h2: removed scale; kept color shift
+   - Reasoning: hover transforms now signal interactivity (cards,
+     buttons, image hovers with translateY) rather than decorate
+     reading targets (headings, body text, logo).
+   -----------------------------------------------------------------
+   Table of Contents — unchanged from v1.0
+   ================================================================= */
+
+
+/* =================================================================
+   01. Design Tokens
+   ================================================================= */
+:root {
+    --bg-color: #ffffff;
+    --text-main: #1a1a1a;
+    --text-secondary: #666666;
+    --text-light: #b3b3b3;
+    --text-silver: #e0e4e5;
+    --accent-teal: #008f9c;
+    --accent-teal-soft: #8ae7f3;
+    --border-color: #eaeaea;
+    --dot-pattern: radial-gradient(#e0e0e0 0.5px, #ffffff 0.5px);
+    --dot-size: 15px 15px;
+}
+
+
+/* =================================================================
+   02. Reset & Base
+   ================================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =================================================================
+   03. Layout — Container
+   ================================================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+}
+
+
+/* =================================================================
+   04. Page Decorations
+   ================================================================= */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--dot-pattern);
+    background-size: var(--dot-size);
+    opacity: 0.15;
+    z-index: -2;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #cce5ff, #8ae7f3, #cce5ff);
+    z-index: 1001;
+}
+
+
+/* =================================================================
+   05. Header & Navigation
+   ================================================================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    position: sticky;
+    top: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+/* ----- Logo -----
+   v1.1: removed rotation on hover; logo should be a stability anchor.
+   Kept subtle color shift on the dot to signal "this is interactive". */
+.logo {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+}
+
+.logo::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-teal-soft);
+    border-radius: 50%;
+    margin-right: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.logo:hover::before {
+    background-color: var(--accent-teal);
+}
+
+.logo span {
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.logo:hover span {
+    color: var(--accent-teal);
+}
+
+/* ----- Nav ----- */
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-main);
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-teal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+nav a:hover { color: var(--accent-teal); }
+nav a:hover::after { transform: scaleX(1); }
+.nav-active a::after { transform: scaleX(1); }
+
+
+/* =================================================================
+   06. Buttons
+   v1.1: scale reduced from 1.05 → 1.02; scan-light kept (subtle and
+   functional — signals "click target" on a real interactive element).
+   ================================================================= */
+
+/* ----- Primary Button ----- */
+.btn-primary {
+    background: var(--text-main);
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::after { left: 100%; }
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: var(--accent-teal);
+    box-shadow: 0 8px 20px rgba(0, 143, 156, 0.18);
+}
+
+/* ----- Secondary Button ----- */
+.btn-secondary {
+    background-color: #ffffff;
+    color: var(--text-main);
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 143, 156, 0.08);
+}
+
+
+/* =================================================================
+   07. Hero — Homepage
+   v1.1: removed scale + translateX on .name-text; kept color shift.
+   Hero image: removed rotate; kept scan-light (signature moment,
+   single high-attention element).
+   ================================================================= */
+.hero-home {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    padding: 120px 0 80px 0;
+    align-items: center;
+}
+
+.hero-home h1 {
+    font-size: 88px;
+    line-height: 1.05;
+    letter-spacing: -3px;
+    cursor: default;
+}
+
+/* "Cyan He" — color only on hover; no transform. */
+.hero-home .name-text {
+    display: inline-block;
+    transition: color 0.4s ease;
+}
+
+.hero-home .name-text:hover {
+    color: var(--accent-teal);
+}
+
+/* "INTERACTION DESIGNER" — slight color deepening only. */
+.hero-home .silver-text {
+    color: var(--text-silver);
+    font-weight: 300;
+    display: inline-block;
+    transition: color 0.4s ease;
+}
+
+.hero-home .silver-text:hover {
+    color: #b1b1b1;
+}
+
+/* Hero photo: scale lift + shadow + scan-light. No rotation. */
+.hero-home .hero-image-wrapper {
+    width: 110%;
+    height: 550px;
+    margin-top: 40px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+}
+
+.hero-home .hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Scan-light retained — single signature element on the page. */
+.hero-home .hero-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.8s ease;
+    pointer-events: none;
+}
+
+.hero-home .hero-image-wrapper:hover::after { left: 150%; }
+
+.hero-home .hero-image-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 40px 80px rgba(0, 143, 156, 0.12);
+}
+
+
+/* =================================================================
+   08. Hero — Project Detail Page
+   v1.1: removed h1 hover transform; removed image rotation.
+   ================================================================= */
+.project-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 100px 0;
+}
+
+.project-hero .hero-text h1 {
+    font-size: 82px;
+    line-height: 1.1;
+    margin: 0;
+    cursor: default;
+    /* No hover state — reading target, not an interactive element. */
+}
+
+/* Detail-page image wrappers: lift + shadow only. No rotation. */
+.project-hero .hero-image-wrapper,
+.intro-image-grid .hero-image-wrapper {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+}
+
+.project-hero .hero-image-wrapper:hover,
+.intro-image-grid .hero-image-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.12);
+}
+
+.project-hero .hero-image-wrapper img,
+.intro-image-grid .hero-image-wrapper img {
+    width: 100%;
+    display: block;
+}
+
+/* Scroll-on-hover variant — applied via class, not page-specific CSS.
+   Add class="hero-image-wrapper scroll-on-hover" to any hero image
+   that should reveal bottom content on hover (currently: P3 only).
+   Overrides the default lift behaviour on the wrapper itself. */
+.hero-image-wrapper.scroll-on-hover {
+    height: 500px;
+    overflow: hidden;
+    cursor: default;
+}
+
+/* When scroll-on-hover is applied to a fixed-height container
+   (img-large, img-small), respect that container's height
+   instead of the default 500px. */
+.hero-image-wrapper.img-large.scroll-on-hover { height: 400px; }
+.hero-image-wrapper.img-large.scroll-on-hover img { height: auto !important; object-fit: unset !important; }
+.hero-image-wrapper.img-large.scroll-on-hover:hover img { transform: translateY(calc(-100% + 400px)); }
+.hero-image-wrapper.img-small.scroll-on-hover { height: 250px; }
+.hero-image-wrapper.img-small.scroll-on-hover img { height: auto !important; object-fit: unset !important; }
+.hero-image-wrapper.img-small.scroll-on-hover:hover img { transform: translateY(calc(-100% + 250px)); }
+
+.hero-image-wrapper.scroll-on-hover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-position: top;
+    transform: translateY(0);
+    transition: transform 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.hero-image-wrapper.scroll-on-hover:hover {
+    transform: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image-wrapper.scroll-on-hover:hover img {
+    transform: translateY(calc(-100% + 500px));
+}
+
+
+/* =================================================================
+   09. Section Eyebrow & Title
+   v1.1: removed hover on .intro-body p (body copy should not move).
+   ================================================================= */
+.section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent-teal);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.intro-title {
+    position: relative;
+    padding-left: 20px;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.intro-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent-teal);
+    border-radius: 2px;
+}
+
+.intro-body p {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.8;
+}
+
+.intro-body p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =================================================================
+   10. Meta Grid
+   ================================================================= */
+.meta-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 40px 0;
+    margin-bottom: 80px;
+}
+
+.meta-item .label {
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.meta-item .value {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =================================================================
+   11. Project List — Homepage
+   v1.1: removed scale + translate on h2; removed rotation on
+   thumbnails. Kept lift + shadow. Asymmetric direction abandoned.
+   ================================================================= */
+.project-row {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    margin-top: 160px;
+    margin-bottom: 150px;
+    align-items: center;
+}
+
+/* Odd: image left, text right */
+.project-row .hero-image-wrapper { grid-column: 1; }
+.project-row .project-info       { grid-column: 2; }
+
+/* Even: text left, image right */
+.project-row:nth-child(even) .hero-image-wrapper { grid-column: 2; }
+.project-row:nth-child(even) .project-info       { grid-column: 1; }
+
+.project-row:nth-child(even) .project-info {
+    text-align: right;
+}
+
+/* Project title: color shift only. No transform. */
+.project-info h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.project-info h2:hover {
+    color: var(--accent-teal);
+}
+
+/* Project cover: 4:3, lift + shadow, no rotation. */
+.project-row .hero-image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+}
+
+.project-row .hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-row .hero-image-wrapper:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.12);
+}
+
+/* Subtle image zoom inside the frame — signals "click to enter". */
+.project-row .hero-image-wrapper:hover img {
+    transform: scale(1.03);
+}
+
+/* View Project link — animated underline + arrow slide. Kept. */
+.view-project {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent-teal);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.view-project::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-teal);
+    transition: width 0.3s ease;
+}
+
+.view-project:hover::after { width: 80%; }
+
+.view-project svg {
+    margin-left: 10px;
+    transition: transform 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.view-project:hover svg {
+    transform: translateX(6px);
+}
+
+
+/* =================================================================
+   12. Project Gallery — P2 滑出效果
+   v1.1: kept entirely. This is a signature interaction tied to
+   project content (showing depth via gallery expansion). The
+   individual card hover scale reduced from 1.08 → 1.04.
+   ================================================================= */
+.project-row-gallery {
+    overflow: visible;
+}
+
+.project-row-gallery .project-gallery { grid-column: 2 !important; }
+
+.project-row-gallery .project-info {
+    grid-column: 1 !important;
+    align-self: end;
+    text-align: left !important;
+}
+
+.project-row-gallery .project-gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: visible;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.project-row-gallery .gallery-card {
+    --slide: 0px;
+    --lift: 0%;
+    --zoom: 1;
+
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    will-change: transform;
+
+    transform: translateX(var(--slide)) translateY(var(--lift)) scale(var(--zoom));
+
+    transition:
+        transform 1s cubic-bezier(0.25, 1, 0.3, 1),
+        box-shadow 0.5s ease;
+}
+
+.project-row-gallery .gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-row-gallery .gallery-card-1 { z-index: 5; --slide: 0px; }
+.project-row-gallery .gallery-card-2 { z-index: 4; --slide: 8px; }
+.project-row-gallery .gallery-card-3 { z-index: 3; --slide: 16px; }
+.project-row-gallery .gallery-card-4 { z-index: 2; --slide: 24px; }
+.project-row-gallery .gallery-card-5 { z-index: 1; --slide: 32px; }
+.project-row-gallery .gallery-card-6 { z-index: 0; --slide: 40px; }
+
+.project-row-gallery .project-gallery.is-expanded {
+    transform: translateX(-145%);
+}
+
+.project-row-gallery .project-gallery.is-expanded .gallery-card-1 { --slide: 0%; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-2 { --slide: 32%; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-3 { --slide: 64%; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-4 { --slide: 96%; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-5 { --slide: 128%; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-6 { --slide: 160%; }
+
+.project-row-gallery .project-gallery.is-expanded .gallery-card-2 { transition-delay: 0.08s; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-3 { transition-delay: 0.16s; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-4 { transition-delay: 0.24s; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-5 { transition-delay: 0.32s; }
+.project-row-gallery .project-gallery.is-expanded .gallery-card-6 { transition-delay: 0.40s; }
+
+/* Single-card hover — reduced scale from 1.08 → 1.04. */
+.project-row-gallery .project-gallery.is-expanded .gallery-card:hover {
+    --lift: -4%;
+    --zoom: 1.04;
+    z-index: 100;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.18);
+    transition:
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.1s !important;
+}
+
+.project-row-gallery .gallery-card-2 { transition-delay: 0.24s; }
+.project-row-gallery .gallery-card-3 { transition-delay: 0.16s; }
+.project-row-gallery .gallery-card-4 { transition-delay: 0.08s; }
+.project-row-gallery .gallery-card-5 { transition-delay: 0s; }
+
+
+/* =================================================================
+   13. Intro Image Grid (Problem section)
+   ================================================================= */
+.intro-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.intro-image-grid .img-large {
+    grid-column: span 2;
+    height: 400px;
+}
+
+.intro-image-grid .img-large img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.intro-image-grid .img-small {
+    height: 250px;
+}
+
+.intro-image-grid .img-small img {
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* =================================================================
+   14. Process Timeline
+   ================================================================= */
+.process-timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 80px;
+}
+
+.process-step {
+    background: #fff;
+    padding: 40px 32px;
+    transition: background 0.3s ease;
+    position: relative;
+}
+
+.process-step:hover {
+    background: #f7f7f7;
+}
+
+.process-step-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent-teal);
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.process-step h3,
+.process-step h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.process-step p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+
+/* =================================================================
+   15. Sketch Row
+   ================================================================= */
+.sketch-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 40px 0 80px;
+}
+
+.sketch-row .hero-image-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: box-shadow 0.4s ease;
+}
+
+.sketch-row .hero-image-wrapper img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.4s ease;
+}
+
+.sketch-row .hero-image-wrapper:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.sketch-row .hero-image-wrapper:hover img {
+    filter: brightness(1.03);
+}
+
+
+/* =================================================================
+   16. Evolution Grid
+   ================================================================= */
+.evolution-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.evolution-card .hero-image-wrapper {
+    width: 100%;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.evolution-card .hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.evolution-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+.evolution-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-top: 6px;
+}
+
+
+/* =================================================================
+   17. Level Cards
+   v1.1: kept translateY(-6px) — proper card affordance.
+   ================================================================= */
+.levels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 80px;
+}
+
+.level-card {
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+}
+
+.level-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-teal-soft), var(--accent-teal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 1;
+}
+
+.level-card:hover {
+    border-color: var(--accent-teal-soft);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 143, 156, 0.08);
+}
+
+.level-card:hover::before {
+    transform: scaleX(1);
+}
+
+.level-card-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.level-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.level-card:hover .level-card-img img {
+    transform: scale(1.04);
+}
+
+.level-card-body {
+    padding: 28px;
+}
+
+.level-card-num {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--accent-teal);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.level-card-body h3,
+.level-card-body h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.level-card-body p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.level-tag {
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 14px;
+    margin-right: 6px;
+}
+
+
+/* =================================================================
+   18. Visual Assets Section
+   ================================================================= */
+.visual-assets-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 100px 0;
+    margin: 120px 0;
+}
+
+.visual-assets-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+
+/* =================================================================
+   19. Background Carousel
+   v1.1: slide hover scale 1.03 → 1.02.
+   ================================================================= */
+.bg-carousel-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f2f2f2;
+    padding: 48px 0 40px;
+    margin-bottom: 72px;
+}
+
+.bg-carousel-wrapper-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 80px;
+    position: relative;
+}
+
+.bg-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.bg-carousel-track {
+    display: flex;
+    gap: 24px;
+    min-width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.bg-carousel-slide {
+    min-width: calc((100% - 48px) / 3);
+    flex-shrink: 0;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.bg-carousel-slide:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+}
+
+.bg-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.bg-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease;
+}
+
+.bg-carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.bg-carousel-prev { left: 20px; }
+.bg-carousel-next { right: 20px; }
+
+.bg-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.bg-carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.bg-carousel-dot.active {
+    background: var(--text-main);
+    transform: scale(1.4);
+}
+
+
+/* =================================================================
+   20. GIF Grids
+   ================================================================= */
+.gif-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.gif-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 700px;
+}
+
+.gif-grid-6 {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.gif-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.gif-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.gif-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+
+/* =================================================================
+   21. Role Grid (P3)
+   ================================================================= */
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 80px;
+}
+
+.role-card {
+    background: #fff;
+    padding: 40px 32px;
+    transition: background 0.3s ease;
+}
+
+.role-card:hover { background: #f7f7f7; }
+
+.role-card-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.role-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.role-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.role-tag {
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 14px;
+    margin-right: 6px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.role-card:hover .role-tag {
+    border-color: var(--accent-teal-soft);
+    color: var(--accent-teal);
+}
+
+
+/* =================================================================
+   22. Responsive Showcase (P3)
+   ================================================================= */
+.responsive-showcase {
+    display: grid;
+    grid-template-columns: 2fr 1fr 0.6fr;
+    gap: 24px;
+    margin-bottom: 80px;
+    align-items: start;
+}
+
+.responsive-showcase .screen-desktop,
+.responsive-showcase .screen-tablet,
+.responsive-showcase .screen-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.responsive-showcase .screen-window {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    position: relative;
+    background: #e8e8e8;
+}
+
+.responsive-showcase .screen-window::before {
+    content: '';
+    display: block;
+    height: 28px;
+    background: #e8e8e8;
+    border-bottom: 1px solid #d0d0d0;
+    background-image: radial-gradient(circle, #fc5f57 5px, transparent 5px),
+                      radial-gradient(circle, #febc2e 5px, transparent 5px),
+                      radial-gradient(circle, #28c840 5px, transparent 5px);
+    background-repeat: no-repeat;
+    background-position: 10px center, 26px center, 42px center;
+    background-size: 10px 10px, 10px 10px, 10px 10px;
+    flex-shrink: 0;
+}
+
+.responsive-showcase .screen-desktop .screen-window,
+.responsive-showcase .screen-tablet  .screen-window,
+.responsive-showcase .screen-mobile  .screen-window { height: 320px; }
+
+.responsive-showcase .screen-window img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+    transform: translateY(0);
+    transition: transform 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.responsive-showcase .screen-window:hover img {
+    transform: translateY(calc(-100% + 292px));
+}
+
+.screen-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+/* =================================================================
+   23. Feature Section
+   v1.1: scale reduced 1.015 → no scale; kept shadow + border shift.
+   The section is large; even 1.5% scale on a wide container creates
+   noticeable jitter at the viewport edges.
+   ================================================================= */
+.feature-section {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.75) 0%, rgba(235, 238, 240, 0.85) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 100px 80px;
+    border-radius: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+.feature-section:hover {
+    box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-section .section-tag {
+    font-size: 11px;
+    color: var(--accent-teal);
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.feature-section h2 {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+}
+
+.feature-section .section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+
+/* =================================================================
+   24. Feedback Card
+   v1.1: kept translateY(-4px) — appropriate card affordance.
+   ================================================================= */
+.feedback-card {
+    background: #f7f7f7;
+    border-radius: 24px;
+    padding: 56px 64px;
+    margin-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+    transition:
+        background 0.4s ease,
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.feedback-card:hover {
+    background: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 143, 156, 0.06);
+}
+
+.feedback-card blockquote {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+    margin: 0 0 24px;
+    padding: 0;
+    border: none;
+}
+
+.feedback-card blockquote::before {
+    content: '\201C';
+    font-size: 72px;
+    line-height: 0;
+    vertical-align: -32px;
+    color: var(--accent-teal-soft);
+    margin-right: 4px;
+}
+
+.feedback-source {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+
+.feedback-change {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-color);
+}
+
+.feedback-change-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--accent-teal);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feedback-change p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+
+/* =================================================================
+   25. Takeaways Grid
+   ================================================================= */
+.takeaways-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 80px;
+}
+
+.takeaway-item {
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.takeaway-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-teal-soft), var(--accent-teal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.takeaway-item:hover {
+    border-color: var(--accent-teal-soft);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 143, 156, 0.06);
+}
+
+.takeaway-item:hover::before {
+    transform: scaleX(1);
+}
+
+.takeaway-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent-teal);
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.takeaway-item h3,
+.takeaway-item h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.takeaway-item p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+
+/* =================================================================
+   26. Tech Cards
+   ================================================================= */
+
+.tech-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.tech-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
+}
+
+.tech-card h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+.tech-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.tech-card-new {
+    text-align: left;
+    padding: 10px 0;
+    transition: transform 0.3s ease;
+}
+
+.tech-card-new:hover {
+    transform: translateY(-4px);
+}
+
+.tech-icon-box {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--accent-teal) 0%, #00b8c8 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: box-shadow 0.3s ease;
+}
+
+.tech-icon-box svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tech-card-new:hover .tech-icon-box {
+    box-shadow: 0 6px 16px rgba(0, 143, 156, 0.28);
+}
+
+.tech-card-new h3,
+.tech-card-new h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+
+.tech-card-new p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.tech-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    text-align: left;
+}
+
+
+/* =================================================================
+   27. Image Caption
+   ================================================================= */
+.hero-image-wrapper .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+    color: white;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 30px 20px 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.hero-image-wrapper:hover .caption {
+    opacity: 1;
+}
+
+
+/* =================================================================
+   28. Connect / CTA Section
+   v1.1: removed h2 scale on hover; kept color shift.
+   Kept translateY(-6px) on card itself — proper interactive
+   affordance for a section the user is meant to act on.
+   ================================================================= */
+.solution-section,
+.connect-section {
+    background-color: #f7f7f7;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    padding: 100px 40px;
+    text-align: center;
+    margin: 120px auto;
+    max-width: 1100px;
+    position: relative;
+    overflow: hidden;
+    transition:
+        background-color 0.5s ease,
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.5s ease,
+        border-color 0.5s ease;
+}
+
+.solution-section:hover,
+.connect-section:hover {
+    background-color: #ffffff;
+    transform: translateY(-6px);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent-teal-soft);
+}
+
+.solution-section h2,
+.connect-section h2 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+    transition: color 0.4s ease;
+}
+
+.solution-section:hover h2,
+.connect-section:hover h2 {
+    color: var(--accent-teal);
+}
+
+
+/* =================================================================
+   29. Reveal Animation
+   ================================================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =================================================================
+   30. Footer
+   ================================================================= */
+footer a:hover {
+    color: #555555 !important;
+    transition: color 0.3s ease;
+}
+
+footer div:first-child {
+    transition: color 0.3s ease;
+    cursor: default;
+}
+
+footer div:first-child:hover {
+    color: #555555;
+}
+
+
+/* =================================================================
+   31. Responsive
+   ================================================================= */
+@media (max-width: 900px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .hero-home,
+    .project-row,
+    .project-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-home h1 {
+        font-size: 60px;
+    }
+
+    .meta-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .process-timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .sketch-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .takeaways-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-section {
+        padding: 60px 32px;
+    }
+
+    .feedback-card {
+        padding: 40px 32px;
+    }
+
+    .project-row-gallery .gallery-card-2,
+    .project-row-gallery .gallery-card-3,
+    .project-row-gallery .gallery-card-4,
+    .project-row-gallery .gallery-card-5 {
+        display: none;
+    }
+
+    .project-row-gallery .project-gallery.is-expanded {
+        transform: none;
+    }
+
+    .project-row-gallery .gallery-card-1 {
+        --slide: 0px;
+    }
+
+    .evolution-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .levels-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gif-grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
+    }
+
+    .gif-grid-6 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .visual-assets-inner {
+        padding: 0 20px;
+    }
+
+    .bg-carousel-wrapper-inner {
+        padding: 0 60px;
+    }
+
+    .bg-carousel-slide {
+        min-width: calc((100% - 24px) / 2);
+    }
+
+    .role-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .responsive-showcase {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .responsive-showcase .screen-desktop .screen-window,
+    .responsive-showcase .screen-tablet  .screen-window,
+    .responsive-showcase .screen-mobile  .screen-window {
+        height: 260px;
+    }
+
+    .responsive-showcase .screen-window:hover img {
+        transform: translateY(calc(-100% + 232px));
+    }
+
+    .responsive-showcase .screen-mobile {
+        display: none;
+    }
+}
+
+
+/* =================================================================
+   32. Accessibility — Reduced Motion
+   ================================================================= */
+@media (prefers-reduced-motion: reduce) {
+    .project-row-gallery .gallery-card,
+    .project-row-gallery .project-gallery {
+        transition-duration: 0.01s !important;
+        transition-delay: 0s !important;
+    }
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyan He - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <a href="index.html" class="logo"><span>Cyan He</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html#projects">Project</a></li>
+                <li><a href="resume.html">About</a></li>
+                <li><a href="#connect-footer">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="assets/Your_Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary" style="text-decoration: none;">
+            Resume
+        </a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-home reveal">
+        <div class="hero-text">
+            <h1>
+                <span class="name-text">Cyan He</span><br>
+                <span class="silver-text">INTERACTION</span><br>
+                <span class="silver-text">DESIGNER</span>
+            </h1>
+            <p style="color: var(--text-secondary); margin-top: 20px; max-width: 400px;">
+                Interaction designer focused on user experience, illustrated interfaces, and interaction system.
+            </p>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="cyan.png" alt="Profile">
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+
+        <!-- P1: The Snow Mountain — image left, text right -->
+        <div class="project-row reveal">
+            <div class="hero-image-wrapper">
+                <img src="P1/P1_Cover.png" alt="Project 1">
+            </div>
+            <div class="project-info">
+                <div style="font-size: 12px; color: var(--text-light); letter-spacing: 2px;">01 / INTERACTION</div>
+                <h2>The Snow Mountain</h2>
+                <p style="color: var(--text-secondary); margin: 20px 0 30px;">
+                    An atmospheric interaction project built in Java using drag, audio, and environmental response systems.
+                </p>
+                <a href="project1.html" class="view-project">VIEW PROJECT <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            </div>
+        </div>
+
+        <!-- P2: Dream, Egg and Mystery — text left, stacked gallery right (expands on scroll) -->
+        <div class="project-row reveal project-row-gallery">
+            <div class="project-gallery">
+                <div class="gallery-card gallery-card-1"><img src="P2/A4_level1.png" alt="Dream, Egg and Mystery - 1"></div>
+                <div class="gallery-card gallery-card-2"><img src="P2/A4_level2.png" alt="Dream, Egg and Mystery - 2"></div>
+                <div class="gallery-card gallery-card-3"><img src="P2/A4_level3.png" alt="Dream, Egg and Mystery - 3"></div>
+                <div class="gallery-card gallery-card-4"><img src="P2/A4_bedroom.png" alt="Dream, Egg and Mystery - 4"></div>
+                <div class="gallery-card gallery-card-5"><img src="P2/A4_bar_1.png" alt="Dream, Egg and Mystery - 5"></div>
+                <div class="gallery-card gallery-card-6"><img src="P2/A4_final.png" alt="Dream, Egg and Mystery - 6"></div>
+            </div>
+            <div class="project-info">
+                <div style="font-size: 12px; color: var(--text-light); letter-spacing: 2px;">02 / GAME DESIGN</div>
+                <h2>Dream, Egg and Mystery</h2>
+                <p style="color: var(--text-secondary); margin: 20px 0 30px;">
+                    A surreal three-level game combining combat, traversal, and environmental storytelling, built in Processing.
+                </p>
+                <a href="project2.html" class="view-project">VIEW PROJECT <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            </div>
+        </div>
+
+        <!-- P3: CMC Pet — image left, text right -->
+        <div class="project-row reveal">
+            <div class="hero-image-wrapper">
+                <img src="P3/P3_cover_1.png" alt="Project 3">
+            </div>
+            <div class="project-info">
+                <div style="font-size: 12px; color: var(--text-light); letter-spacing: 2px;">03 / WEB DESIGN</div>
+                <h2>CMC Pet</h2>
+                <p style="color: var(--text-secondary); margin: 20px 0 30px;">
+                    A warm, illustrated pet adoption website designed to build emotional connection, built in HTML and CSS.
+                </p>
+                <a href="project3.html" class="view-project">VIEW PROJECT <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Contact -->
+    <section id="connect-footer" class="solution-section reveal">
+        <h2>Let's Connect</h2>
+        <p style="margin: 20px 0 40px;">Always open to collaborating on projects</p>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn-primary" onclick="
+                navigator.clipboard.writeText('wha75@sfu.ca');
+                this.textContent='Copied ✓';
+                setTimeout(()=>this.textContent='wha75@sfu.ca',2000)
+            ">wha75@sfu.ca</button>
+            <a href="assets/Your_Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-secondary" style="text-decoration: none;">
+                Download Resume
+            </a>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color);">
+        <a href="https://www.sfu.ca/" target="_blank" style="text-decoration: none; color: inherit;">SIMON FRASER UNIVERSITY</a>
+        <div style="display: flex; gap: 20px;">
+            <a href="https://www.linkedin.com/in/cyan-he-503673410/" style="text-decoration: none; color: inherit;">LINKEDIN</a>
+            <a href="https://www.instagram.com/wzamgqs" target="_blank" style="text-decoration: none; color: inherit;">INSTAGRAM</a>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    // Fade in sections as they scroll into view
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // P2 gallery — fan out when scrolled into view, collapse when scrolled away
+    const gallery = document.querySelector('.project-row-gallery .project-gallery');
+    if (gallery) {
+        const galleryObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0.5) {
+                    gallery.classList.add('is-expanded');
+                } else {
+                    gallery.classList.remove('is-expanded');
+                }
+            });
+        }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+        galleryObserver.observe(gallery);
+    }
+</script>
+</body>
+</html>
