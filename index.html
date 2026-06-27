@@ -11,17 +11,27 @@
 
     <header>
         <a href="index.html" class="logo"><span>Cyan He</span></a>
-        <nav>
+        <!-- Mobile-only hamburger; hidden on desktop via CSS -->
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+            <span></span><span></span><span></span>
+        </button>
+        <nav id="site-nav">
             <ul>
                 <li><a href="index.html#projects">Project</a></li>
                 <li><a href="resume.html">About</a></li>
                 <li><a href="#connect-footer">Contact</a></li>
+                <!-- Drawer-only Resume link; hidden on desktop via CSS -->
+                <li class="nav-resume-item">
+                    <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary" style="text-decoration:none; margin-top:16px;">Resume</a>
+                </li>
             </ul>
         </nav>
         <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary" style="text-decoration: none;">
             Resume
         </a>
     </header>
+    <!-- Backdrop behind the open drawer; inert on desktop -->
+    <div class="nav-backdrop"></div>
 
     <!-- Hero -->
     <section class="hero-home reveal">
@@ -144,6 +154,20 @@
         }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
         galleryObserver.observe(gallery);
     }
+
+    // Mobile nav drawer toggle (no effect on desktop, where the toggle is hidden)
+    (function () {
+        const toggle = document.querySelector('.nav-toggle');
+        const backdrop = document.querySelector('.nav-backdrop');
+        const nav = document.getElementById('site-nav');
+        if (!toggle || !nav) return;
+        const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
+        const open  = () => { document.body.classList.add('nav-open');    toggle.setAttribute('aria-expanded', 'true');  };
+        toggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? close() : open());
+        if (backdrop) backdrop.addEventListener('click', close);
+        nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    })();
 </script>
 </body>
 </html>
