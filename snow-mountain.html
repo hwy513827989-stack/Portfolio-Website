@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Snow Mountain - Project</title>
+    <meta name="description"
+        content="The Snow Mountain — an interactive ritual system built in Java, using weather states and environmental feedback instead of UI. A case study by Cyan He.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Snow Mountain — Interaction Case Study">
+    <meta property="og:description"
+        content="An interactive ritual system built in Java, using weather and environmental feedback instead of explicit UI.">
+    <meta property="og:image" content="https://hwy513827989-stack.github.io/Portfolio-Website/P1/P1_Cover.png">
+    <meta property="og:url" content="https://hwy513827989-stack.github.io/Portfolio-Website/project1.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo"><span>Cyan He</span></a>
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="site-nav">
+                <ul>
+                    <li class="nav-active"><a href="index.html#projects">Project</a></li>
+                    <li><a href="resume.html">About</a></li>
+                    <li><a href="#connect-footer">Contact</a></li>
+                    <li class="nav-resume-item"><a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf"
+                            class="btn-primary" style="text-decoration:none; margin-top:16px;">Resume</a></li>
+                </ul>
+            </nav>
+            <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary"
+                style="text-decoration: none;">Resume</a>
+        </div>
+    </header>
+    <div class="nav-backdrop"></div>
+
+    <div class="container">
+
+        <section class="project-hero reveal">
+            <div class="hero-text">
+                <div style="font-size: 11px; color: var(--text-light); letter-spacing: 2.5px; margin-bottom: 15px; transition: color 0.3s ease; cursor: default;"
+                    onmouseover="this.style.color='#555555'" onmouseout="this.style.color='var(--text-light)'">
+                    IAT 265 — MULTIMEDIA PROGRAMMING FOR ART AND DESIGN
+                </div>
+                <h1>The Snow<br>Mountain</h1>
+                <p
+                    style="color: var(--text-secondary); margin: 30px 0; max-width: 420px; font-size: 17px; line-height: 1.7;">
+                    A Java-based interactive experience in which the player performs a ritual by entering object
+                    sequences and placing illustrated items on a mountain. Weather, sound, particles, and object changes
+                    show whether each action was accepted.
+                </p>
+                <a href="https://www.youtube.com/watch?v=QS28fxFO2qI" target="_blank" class="btn-primary"
+                    style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
+                    Watch Demo ↗
+                </a>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="P1/P1_Cover.png" alt="The Snow Mountain — project cover showing the ritual scene">
+                <div class="caption">THE SNOW MOUNTAIN — COVER</div>
+            </div>
+        </section>
+
+        <div class="meta-grid reveal">
+            <div class="meta-item">
+                <div class="label">COURSE</div>
+                <div class="value">IAT 265</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">ROLE</div>
+                <div class="value">Design & Development</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">DURATION</div>
+                <div class="value">2 Weeks</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">TOOLS</div>
+                <div class="value">Java, Procreate</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">TYPE</div>
+                <div class="value">Solo Project</div>
+            </div>
+        </div>
+
+        <section class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin: 0 0 120px;">
+            <div class="intro-body">
+                <div class="section-eyebrow">Overview</div>
+                <h2 class="intro-title">How the Ritual Works</h2>
+                <p>
+                    The player acts as a shaman trying to calm a snow mountain. Each weather condition requires a
+                    different sequence of ritual objects.
+                </p>
+                <p>
+                    The player enters the required sequence, then drags the summoned objects onto the mountain. The
+                    program checks the weather, input order, and object placement before triggering sound, particles,
+                    and environmental changes.
+                </p>
+            </div>
+            <div class="intro-image-grid">
+                <div class="hero-image-wrapper img-large">
+                    <img src="P1/HeavyRain.png" alt="Heavy rain weather state during ritual">
+                    <div class="caption">HEAVY RAIN — WEATHER STATE</div>
+                </div>
+                <div class="hero-image-wrapper img-small">
+                    <img src="P1/Sun.png" alt="Sunny ritual scene with mountain in daylight">
+                    <div class="caption">SUNSHINE — RITUAL SCENE</div>
+                </div>
+                <div class="hero-image-wrapper img-small">
+                    <img src="P1/Night.png" alt="Night ritual scene with darkened mountain">
+                    <div class="caption">NIGHT — RITUAL SCENE</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal" style="margin-bottom: 40px;">
+            <div class="section-eyebrow">Interaction</div>
+            <h2 class="intro-title">Interaction Sequence</h2>
+        </section>
+
+        <div class="process-timeline reveal">
+            <div class="process-step">
+                <div class="process-step-num">01 — CHECK THE WEATHER</div>
+                <h3>Identify the Current Condition</h3>
+                <p>The current weather determines which ritual sequence the program will accept.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-num">02 — ENTER THE SEQUENCE</div>
+                <h3>Summon the Required Objects</h3>
+                <p>The player selects ritual inputs in the required order. A correct sequence makes the corresponding
+                    objects available.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-num">03 — PLACE THE OBJECTS</div>
+                <h3>Complete the Ritual</h3>
+                <p>The player drags the required objects onto the mountain. Correct placement triggers sound, particles,
+                    and changes in the environment.</p>
+            </div>
+        </div>
+
+        <div class="section-eyebrow reveal" style="margin-bottom: 16px;">Final Art Assets</div>
+        <div class="sketch-row reveal">
+            <div class="hero-image-wrapper">
+                <img src="P1/Draft1.png" alt="Finished background artwork for The Snow Mountain">
+                <div class="caption">BACKGROUND ART 01</div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="P1/Draft2.png" alt="Finished background artwork for The Snow Mountain">
+                <div class="caption">BACKGROUND ART 02</div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="P1/item1.png" alt="Hand-drawn ritual object — offering item">
+                <div class="caption">RITUAL OBJECT</div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="P1/item2.png" alt="Hand-drawn ritual object — offering item">
+                <div class="caption">RITUAL OBJECT</div>
+            </div>
+        </div>
+
+        <section class="feature-section reveal" style="margin-bottom: 80px;">
+            <div style="margin: 0 auto 70px;">
+                <div class="section-tag">INTERACTION SYSTEM</div>
+                <h2>Weather, Objects, and Program Logic</h2>
+                <p class="section-desc">
+                    The program connects weather conditions, ordered inputs, object placement, and visual or audio
+                    responses. Each step must be completed in the expected order before the environment changes.
+                </p>
+            </div>
+            <div class="tech-grid-3">
+                <div class="tech-card-new">
+                    <div class="tech-icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                            <path d="M2 2l7.586 7.586" />
+                            <circle cx="11" cy="11" r="2" />
+                        </svg>
+                    </div>
+                    <h3>Separate Image Assets</h3>
+                    <p>Backgrounds and ritual objects were drawn in Procreate and imported into Java as separate image
+                        files. Objects can be shown, hidden, and dragged independently from the background.
+                    </p>
+                </div>
+                <div class="tech-card-new">
+                    <div class="tech-icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
+                    <h3>Weather Conditions</h3>
+                    <p>Each weather state is linked to a specific ritual sequence. The program checks the current
+                        condition before accepting the input order and object placement.</p>
+                </div>
+                <div class="tech-card-new">
+                    <div class="tech-icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </div>
+                    <h3>Action Responses</h3>
+                    <p>Startup instructions explain the controls. During the ritual, sound, particles, object
+                        visibility, and environmental changes show whether the player's actions were accepted.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal" style="margin-bottom: 40px;">
+            <div class="section-eyebrow">Reflection</div>
+            <h2 class="intro-title">Takeaways</h2>
+        </section>
+
+        <div class="takeaways-grid reveal">
+            <div class="takeaway-item">
+                <div class="takeaway-num">LEARNING 01</div>
+                <h3>State Changes Need Clear Confirmation</h3>
+                <p>When environmental changes were too subtle, it was difficult to tell whether an action had been
+                    accepted. Sound and particles made successful actions easier to recognise.</p>
+            </div>
+            <div class="takeaway-item">
+                <div class="takeaway-num">LEARNING 02</div>
+                <h3>Drag Targets Need Enough Tolerance</h3>
+                <p>Small or irregular target areas made object placement unreliable. The target zones needed to be
+                    larger than the visible illustrated shapes.</p>
+            </div>
+            <div class="takeaway-item">
+                <div class="takeaway-num">IF I DID IT AGAIN — 01</div>
+                <h3>Test Hit Areas Before Final Artwork</h3>
+                <p>I would test clickable, draggable, and target regions before completing the final assets instead of
+                    adjusting collision areas after the artwork was finished.</p>
+            </div>
+            <div class="takeaway-item">
+                <div class="takeaway-num">IF I DID IT AGAIN — 02</div>
+                <h3>Add More Types of Input</h3>
+                <p>A future version could use held inputs, traced paths, or timed sequences instead of relying only on
+                    clicking and dragging.</p>
+            </div>
+        </div>
+
+        <div class="reveal" style="text-align: center; margin-bottom: 120px;">
+            <a href="https://www.youtube.com/watch?v=QS28fxFO2qI" target="_blank" class="btn-primary"
+                style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; font-size: 15px;">
+                Watch Full Demo on YouTube ↗
+            </a>
+        </div>
+
+        <section id="connect-footer" class="connect-section reveal">
+            <h2>Let's Connect</h2>
+            <p style="margin: 20px 0 40px; color: var(--text-secondary);">Always open to collaborating on projects</p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <button class="btn-primary" onclick="
+                navigator.clipboard.writeText('wha75@sfu.ca');
+                this.textContent='Copied ✓';
+                setTimeout(()=>this.textContent='wha75@sfu.ca',2000)
+            ">wha75@sfu.ca</button>
+                <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-secondary"
+                    style="text-decoration: none;">Download Resume</a>
+            </div>
+        </section>
+
+        <footer
+            style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color); margin-top: 0;">
+            <a href="https://www.sfu.ca/" target="_blank" style="text-decoration: none; color: inherit;">SIMON FRASER
+                UNIVERSITY</a>
+            <div style="display: flex; gap: 20px;">
+                <a href="https://www.linkedin.com/in/wenyi-he-4a7356413?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                    style="text-decoration: none; color: inherit;">LINKEDIN</a>
+                <a href="https://www.instagram.com/wzamgqs" target="_blank"
+                    style="text-decoration: none; color: inherit;">INSTAGRAM</a>
+            </div>
+        </footer>
+
+    </div>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Mobile nav drawer toggle (hidden on desktop; no effect there)
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const backdrop = document.querySelector('.nav-backdrop');
+            const nav = document.getElementById('site-nav');
+            if (!toggle || !nav) return;
+            const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
+            const open = () => { document.body.classList.add('nav-open'); toggle.setAttribute('aria-expanded', 'true'); };
+            toggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? close() : open());
+            if (backdrop) backdrop.addEventListener('click', close);
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+        })();
+    </script>
+</body>
+
+</html>

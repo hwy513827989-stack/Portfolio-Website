@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMC Pet — Project</title>
+    <meta name="description"
+        content="CMC Pet — a responsive pet adoption website created by a three-person student team. Cyan He produced the illustrated asset set and built shared front-end components.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="CMC Pet — Web Design Case Study">
+    <meta property="og:description"
+        content="A responsive pet adoption website created by a three-person team. I focused on illustration, shared interface components, and front-end implementation.">
+    <meta property="og:image" content="https://hwy513827989-stack.github.io/Portfolio-Website/P3/P3_cover_1.png">
+    <meta property="og:url" content="https://hwy513827989-stack.github.io/Portfolio-Website/cmc-pet.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barrio&family=Mynerve&family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* =================================================================
+           project3.html — page-specific styles
+           ================================================================= */
+
+        /* ----- Process thumbnails: one row of four, tall, full frame
+                 visible (contain), click to zoom for detail ----- */
+        .process-thumbs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 40px;
+        }
+
+        .thumb {
+            appearance: none;
+            width: 100%;
+            padding: 0;
+            text-align: left;
+            font: inherit;
+            color: inherit;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            background: transparent;
+            cursor: zoom-in;
+            transition: transform 0.35s ease;
+        }
+
+        .thumb:hover {
+            transform: translateY(-4px);
+            box-shadow: none;
+        }
+
+        .thumb:focus-visible {
+            outline: 3px solid var(--accent-teal-soft);
+            outline-offset: 4px;
+        }
+
+        /* Taller window; contain shows the whole frame (no cropping).
+           Light checkered-free grey backing sits behind any letterboxing. */
+        .thumb-window {
+            height: 380px;
+            overflow: hidden;
+            position: relative;
+            background: transparent;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            border-radius: 14px;
+        }
+
+        .thumb-window img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            object-position: top center;
+        }
+
+        .thumb-cap {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 12px 2px 0;
+            border-top: none;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .thumb-tag {
+            font-size: 8px;
+            letter-spacing: 1px;
+            color: var(--accent-teal);
+            border: 1px solid var(--accent-teal-soft);
+            border-radius: 100px;
+            padding: 2px 7px;
+            flex-shrink: 0;
+        }
+
+        /* ----- Lightbox ----- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 20, 0.82);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            cursor: zoom-out;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 92vw;
+            max-height: 88vh;
+            border-radius: 10px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-cap {
+            position: absolute;
+            bottom: 24px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .process-band {
+            position: relative;
+            padding: 45px 0 5px;
+            margin-bottom: 90px;
+        }
+
+        .process-band::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 100vw;
+            transform: translateX(-50%);
+            background: #f3f3f3;
+            z-index: -1;
+        }
+
+        /* ----- Design system: palette + type ----- */
+        .ds-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .ds-block-label {
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .palette-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .swatch {
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 14px;
+        }
+
+        .swatch .role {
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 6px;
+        }
+
+        .swatch .name {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .swatch .hex {
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            opacity: 0.75;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        .swatch-choco {
+            background: #663012;
+            color: #FFF8E8;
+        }
+
+        .swatch-cream {
+            background: #FFF8E8;
+            color: #663012;
+        }
+
+        .swatch-pink {
+            background: #FFCEE0;
+            color: #663012;
+        }
+
+        .swatch-mint {
+            background: #9CD8BF;
+            color: #663012;
+        }
+
+        .type-list {
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .type-item {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .type-item:last-child {
+            border-bottom: none;
+        }
+
+        .type-specimen {
+            line-height: 1.1;
+            color: var(--text-main);
+        }
+
+        .type-meta {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-align: right;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+
+        .spec-display {
+            font-family: 'Barrio', cursive;
+            font-size: 30px;
+        }
+
+        .spec-hand {
+            font-family: 'Mynerve', cursive;
+            font-size: 24px;
+            color: #d46a94;
+        }
+
+        .spec-head {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .spec-body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .process-thumbs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .thumb-window {
+                height: 340px;
+            }
+
+            .ds-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process-thumbs {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .thumb-window {
+                height: 240px;
+            }
+
+            .palette-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo"><span>Cyan He</span></a>
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="site-nav">
+                <ul>
+                    <li class="nav-active"><a href="index.html#projects">Work</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#connect-footer">Contact</a></li>
+                    <li class="nav-resume-item"><a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf"
+                            class="btn-primary" style="text-decoration:none; margin-top:16px;">Resume</a></li>
+                </ul>
+            </nav>
+            <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary"
+                style="text-decoration: none;">Resume</a>
+        </div>
+    </header>
+    <div class="nav-backdrop"></div>
+
+    <div class="container">
+
+        <section class="project-hero reveal">
+            <div class="hero-text">
+                <div style="font-size: 11px; color: var(--text-light); letter-spacing: 2.5px; margin-bottom: 15px; transition: color 0.3s ease; cursor: default;"
+                    onmouseover="this.style.color='#555555'" onmouseout="this.style.color='var(--text-light)'">
+                    IAT 235 — WEB DESIGN &amp; DEVELOPMENT · GROUP PROJECT
+                </div>
+                <h1>CMC Pet</h1>
+                <p
+                    style="color: var(--text-secondary); margin: 30px 0; max-width: 420px; font-size: 17px; line-height: 1.7;">
+                    A responsive pet adoption website created by a three-person team. I focused on illustration, shared
+                    interface components, and front-end implementation. </p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="https://pages.github.sfu.ca/wha75/235_P4_CMC/" target="_blank" class="btn-primary"
+                        style="text-decoration: none;">
+                        View Live Site ↗
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper scroll-on-hover">
+                <img src="P3/P3_desktop.png" alt="CMC Pet homepage — final build">
+                <div class="caption">CMC PET — HOMEPAGE (LIVE BUILD)</div>
+            </div>
+        </section>
+
+        <div class="meta-grid reveal">
+            <div class="meta-item">
+                <div class="label">COURSE</div>
+                <div class="value">IAT 235</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">ROLE</div>
+                <div class="value">Illustration & Front-end Components</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">DURATION</div>
+                <div class="value">4 Weeks</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">TOOLS</div>
+                <div class="value">Figma, Procreate, HTML, CSS, Git</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">TYPE</div>
+                <div class="value">Group Project</div>
+            </div>
+
+
+
+        </div>
+
+        <!-- ===================== PROJECT DIRECTION ===================== -->
+        <section class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin: 0 0 120px;">
+            <div class="intro-body">
+                <div class="section-eyebrow">Project Direction</div>
+                <h2 class="intro-title">A Warm, Illustrated Adoption Website</h2>
+                <p>
+                    The course assignment was to design and build a responsive multi-page website. Our three-person team
+                    chose pet adoption and developed a warmer, more playful visual direction instead of using the
+                    neutral style common to many information-heavy websites.
+                </p>
+                <p>
+                    The visual direction and page structure were developed collaboratively. My individual contribution
+                    focused on the illustrated assets and shared front-end components.
+                </p>
+            </div>
+            <div class="intro-image-grid">
+                <div class="hero-image-wrapper img-large scroll-on-hover">
+                    <img src="P3/P3_desktop2.png" alt="Pet detail page — final build">
+                    <div class="caption">PET DETAIL PAGE (LIVE BUILD)</div>
+                </div>
+                <div class="hero-image-wrapper img-small">
+                    <img src="P3/P3_icon1.png" alt="Hand-drawn category and preference icons">
+                    <div class="caption">HAND-DRAWN ICONS</div>
+                </div>
+                <div class="hero-image-wrapper img-small">
+                    <img src="P3/P3_icon2.png" alt="Hand-drawn category and preference icons">
+                    <div class="caption">HAND-DRAWN ICONS</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== MY ROLE ===================== -->
+        <section class="reveal" style="margin-bottom: 40px;">
+            <div class="section-eyebrow">Contribution</div>
+            <h2 class="intro-title">My Contributions</h2>
+        </section>
+
+        <div class="role-grid reveal">
+            <div class="role-card">
+                <div class="role-card-label">Individual Contribution</div>
+                <h3>Illustration &amp; Icons</h3>
+                <p>
+                    Drew the complete custom asset set in Procreate, including the logo, category illustrations for
+                    cats, dogs, and rodents, and the preference-guide icons used on animal profile pages.
+                </p>
+                <span class="role-tag">Procreate</span>
+                <span class="role-tag">Icon set</span>
+                <span class="role-tag">Logo</span>
+            </div>
+            <div class="role-card">
+                <div class="role-card-label">Shared Contribution</div>
+                <h3>Responsive CSS</h3>
+                <p>
+                    Contributed to the responsive implementation and helped adjust layouts for desktop, tablet, and
+                    mobile. The responsive work was shared rather than completed by one person.
+                </p>
+                <span class="role-tag">CSS Grid</span>
+                <span class="role-tag">Media queries</span>
+                <span class="role-tag">Team implementation</span>
+            </div>
+            <div class="role-card">
+                <div class="role-card-label">Individual Contribution</div>
+                <h3>Navigation &amp; Shared Components</h3>
+                <p>
+                    Built the search bar, dropdown navigation, and footer. I also checked link paths across pages while
+                    the team combined its work through Git.
+                </p>
+                <span class="role-tag">Navigation</span>
+                <span class="role-tag">Search bar</span>
+                <span class="role-tag">Git</span>
+            </div>
+        </div>
+
+        <!-- ===================== TEAM PROCESS: WIREFRAMES & EXPLORATION ===================== -->
+        <section class="reveal" style="margin: 100px 0 8px;">
+            <div class="section-eyebrow">Team Process</div>
+            <h2 class="intro-title">Wireframes and Early Visual Explorations</h2>
+            <p style="color: var(--text-secondary); max-width: 640px; line-height: 1.8; margin: 0 0 20px 20px;">
+                The team created desktop and mobile wireframes in Figma to establish content order and page
+                structure
+                before styling. We then tested a darker visual direction and replaced it with a lighter pastel
+                palette
+                because it better matched the illustrated assets and the tone we wanted for the site.
+            </p>
+        </section>
+
+        <section class="process-band">
+            <div class="process-thumbs reveal">
+                <button class="thumb" type="button" data-full="P3/figma-wireframe-detail-desktop.png"
+                    data-cap="Detail page — desktop wireframe (Figma)">
+                    <div class="thumb-window"><img src="P3/figma-wireframe-detail-desktop.png"
+                            alt="Detail page wireframe — desktop"></div>
+                    <div class="thumb-cap">DESKTOP WIREFRAME <span class="thumb-tag">TEAM</span></div>
+                </button>
+                <button class="thumb" type="button" data-full="P3/figma-wireframe-detail-mobile.png"
+                    data-cap="Detail page — mobile wireframe (Figma)">
+                    <div class="thumb-window"><img src="P3/figma-wireframe-detail-mobile.png"
+                            alt="Detail page wireframe — mobile"></div>
+                    <div class="thumb-cap">MOBILE WIREFRAME <span class="thumb-tag">TEAM</span></div>
+                </button>
+                <button class="thumb" type="button" data-full="P3/figma-explore-early-1.png"
+                    data-cap="Early homepage direction — team, later replaced (Figma)">
+                    <div class="thumb-window"><img src="P3/figma-explore-early-1.png"
+                            alt="Early exploration — homepage">
+                    </div>
+                    <div class="thumb-cap">EARLY HOMEPAGE <span class="thumb-tag">TEAM</span></div>
+                </button>
+                <button class="thumb" type="button" data-full="P3/figma-explore-early-2.png"
+                    data-cap="Early detail direction — team, later replaced (Figma)">
+                    <div class="thumb-window"><img src="P3/figma-explore-early-2.png" alt="Early exploration — detail">
+                    </div>
+                    <div class="thumb-cap">EARLY DETAIL <span class="thumb-tag">TEAM</span></div>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ===================== VISUAL DIRECTION: PALETTE + TYPE ===================== -->
+        <section class="reveal" style="margin: 90px 0 8px;">
+            <div class="section-eyebrow">Visual Direction</div>
+            <h2 class="intro-title">Colour and Typography</h2>
+            <p style="color: var(--text-secondary); max-width: 640px; line-height: 1.8; margin: 0 0 40px 20px;">
+                The colour palette and typography were selected as a team. Cocoa was used for most text, cream for large
+                backgrounds, and pink and mint for accents. Barrio and Mynerve were used sparingly for decorative
+                headings, while Montserrat and Poppins handled headings, body copy, and interface text.
+            </p>
+        </section>
+
+        <div class="ds-grid reveal">
+            <div>
+                <div class="ds-block-label">Colour</div>
+                <div class="palette-row">
+                    <div class="swatch swatch-choco">
+                        <div class="role">Text</div>
+                        <div class="name">Cocoa</div>
+                        <div class="hex">#663012</div>
+                    </div>
+                    <div class="swatch swatch-cream">
+                        <div class="role">BG</div>
+                        <div class="name">Cream</div>
+                        <div class="hex">#FFF8E8</div>
+                    </div>
+                    <div class="swatch swatch-pink">
+                        <div class="role">Accent</div>
+                        <div class="name">Pink</div>
+                        <div class="hex">#FFCEE0</div>
+                    </div>
+                    <div class="swatch swatch-mint">
+                        <div class="role">Accent</div>
+                        <div class="name">Mint</div>
+                        <div class="hex">#9CD8BF</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="ds-block-label">Typography</div>
+                <div class="type-list">
+                    <div class="type-item">
+                        <div class="type-specimen spec-display">CMC Pet</div>
+                        <div class="type-meta">Barrio<br>Display</div>
+                    </div>
+                    <div class="type-item">
+                        <div class="type-specimen spec-hand">Furry friends waiting</div>
+                        <div class="type-meta">Mynerve<br>Handwritten</div>
+                    </div>
+                    <div class="type-item">
+                        <div class="type-specimen spec-head">A Little About Frankie</div>
+                        <div class="type-meta">Montserrat<br>Headings</div>
+                    </div>
+                    <div class="type-item">
+                        <div class="type-specimen spec-body">Perfect for homes with existing pets.</div>
+                        <div class="type-meta">Poppins<br>Body &amp; UI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== RESPONSIVE SHOWCASE ===================== -->
+        <section class="reveal" style="margin: 90px 0 40px;">
+            <div class="section-eyebrow">Responsive Build</div>
+            <h2 class="intro-title">Layouts for Desktop, Tablet, and Mobile</h2>
+            <p
+                style="color: var(--text-secondary); max-width: 600px; line-height: 1.8; margin-top: 16px; margin-bottom: 40px;">
+                The final site keeps the same content across screen sizes while changing the grid, spacing, navigation,
+                and image arrangement. On smaller screens, multi-column pet grids collapse into fewer columns,
+                navigation condenses, and detail-page content moves into a single reading order.
+            </p>
+        </section>
+
+        <div class="responsive-showcase reveal">
+            <div class="screen-desktop">
+                <div class="screen-window">
+                    <img src="P3/P3_desktop.png" alt="Desktop layout">
+                </div>
+                <div class="screen-label">Desktop</div>
+            </div>
+            <div class="screen-tablet">
+                <div class="screen-window">
+                    <img src="P3/P3_tablet.png" alt="Tablet layout">
+                </div>
+                <div class="screen-label">Tablet</div>
+            </div>
+            <div class="screen-mobile">
+                <div class="screen-window">
+                    <img src="P3/P3_mobile.png" alt="Mobile layout">
+                </div>
+                <div class="screen-label">Mobile</div>
+            </div>
+        </div>
+
+        <div class="reveal" style="text-align: center; margin: 20px 0 120px;">
+            <a href="https://pages.github.sfu.ca/wha75/235_P4_CMC/" target="_blank" rel="noopener noreferrer"
+                class="btn-primary" style="text-decoration: none; padding: 14px 32px; font-size: 15px;">
+                Visit the Live Site ↗
+            </a>
+        </div>
+
+        <section id="connect-footer" class="connect-section reveal">
+            <h2>Let's Connect</h2>
+
+            <p style="margin: 20px 0 40px; color: var(--text-secondary);">
+                Always open to collaborating on projects.
+            </p>
+
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <button class="btn-primary" onclick="
+            navigator.clipboard.writeText('wha75@sfu.ca');
+            this.textContent='Copied ✓';
+            setTimeout(() => this.textContent='wha75@sfu.ca', 2000);
+        ">
+                    wha75@sfu.ca
+                </button>
+
+                <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-secondary"
+                    style="text-decoration: none;">
+                    Download Resume
+                </a>
+            </div>
+        </section>
+
+        <footer
+            style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color); margin-top: 0;">
+            <a href="https://www.sfu.ca/" target="_blank" style="text-decoration: none; color: inherit;">SIMON FRASER
+                UNIVERSITY</a>
+            <div style="display: flex; gap: 20px;">
+                <a href="https://www.linkedin.com/in/wenyi-he-4a7356413?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                    style="text-decoration: none; color: inherit;">LINKEDIN</a>
+                <a href="https://www.instagram.com/wzamgqs" target="_blank"
+                    style="text-decoration: none; color: inherit;">INSTAGRAM</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded design image"
+        aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+        <img id="lightboxImg" src="" alt="Enlarged process frame">
+        <div class="lightbox-cap" id="lightboxCap"></div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Lightbox — click a process thumbnail to enlarge
+        (function () {
+            const box = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            const cap = document.getElementById('lightboxCap');
+            const closeBtn = document.getElementById('lightboxClose');
+            let lastTrigger = null;
+            if (!box) return;
+            const open = (src, caption, trigger) => {
+                img.src = src;
+                cap.textContent = caption || '';
+                lastTrigger = trigger || null;
+                box.classList.add('open');
+                box.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                closeBtn.focus();
+            };
+            const close = () => {
+                box.classList.remove('open');
+                box.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                img.src = '';
+                if (lastTrigger) lastTrigger.focus();
+            };
+            document.querySelectorAll('.thumb').forEach(t => {
+                t.addEventListener('click', () => open(t.dataset.full, t.dataset.cap, t));
+            });
+            box.addEventListener('click', (e) => { if (e.target !== img) close(); });
+            closeBtn.addEventListener('click', close);
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+        })();
+
+        // Mobile nav drawer toggle (hidden on desktop; no effect there)
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const backdrop = document.querySelector('.nav-backdrop');
+            const nav = document.getElementById('site-nav');
+            if (!toggle || !nav) return;
+            const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
+            const open = () => { document.body.classList.add('nav-open'); toggle.setAttribute('aria-expanded', 'true'); };
+            toggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? close() : open());
+            if (backdrop) backdrop.addEventListener('click', close);
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+        })();
+    </script>
+</body>
+
+</html>

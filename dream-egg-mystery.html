@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream, Egg and Mystery - Project</title>
+    <meta name="description"
+        content="Dream, Egg and Mystery — a surreal three-level game built in Processing, combining click-based combat, projectile shooting, platforming, and original illustrated assets.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Dream, Egg and Mystery — Game Design Case Study">
+    <meta property="og:description"
+        content="A surreal three-level game combining click-based combat, projectile shooting, platforming, and original illustrated assets.">
+    <meta property="og:image" content="https://hwy513827989-stack.github.io/Portfolio-Website/P2/P2_Cover.png">
+    <meta property="og:url" content="https://hwy513827989-stack.github.io/Portfolio-Website/dream-egg-mystery.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .zoomable-image {
+            appearance: none;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            cursor: zoom-in;
+        }
+
+        .zoomable-image:focus-visible {
+            outline: 3px solid var(--accent-teal-soft);
+            outline-offset: 4px;
+        }
+
+        .zoomable-image img {
+            display: block;
+            width: 100%;
+        }
+
+        .zoomable-image:hover img {
+            opacity: 0.94;
+        }
+
+        .zoomable-asset {
+            cursor: zoom-in;
+        }
+
+        .zoomable-asset:focus-visible {
+            outline: 3px solid var(--accent-teal-soft);
+            outline-offset: -3px;
+        }
+
+        .asset-lightbox {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: rgba(20, 20, 20, 0.84);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+        }
+
+        .asset-lightbox.open {
+            display: flex;
+        }
+
+        .asset-lightbox img {
+            max-width: 92vw;
+            max-height: 86vh;
+            border-radius: 10px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .asset-lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .asset-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .asset-lightbox-cap {
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: 22px;
+            color: rgba(255, 255, 255, 0.75);
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo"><span>Cyan He</span></a>
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="site-nav">
+                <ul>
+                    <li class="nav-active"><a href="index.html#projects">Work</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#connect-footer">Contact</a></li>
+                    <li class="nav-resume-item"><a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf"
+                            class="btn-primary" style="text-decoration:none; margin-top:16px;">Resume</a></li>
+                </ul>
+            </nav>
+            <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-primary"
+                style="text-decoration: none;">Resume</a>
+        </div>
+    </header>
+    <div class="nav-backdrop"></div>
+
+    <div class="container">
+
+        <section class="project-hero reveal">
+            <div class="hero-text">
+                <div style="font-size: 11px; color: var(--text-light); letter-spacing: 2.5px; margin-bottom: 15px; transition: color 0.3s ease; cursor: default;"
+                    onmouseover="this.style.color='#555555'" onmouseout="this.style.color='var(--text-light)'">
+                    IAT 167 — DIGITAL GAMES: GENRE, STRUCTURE, PROGRAMMING AND PLAY
+                </div>
+                <h1>Dream, Egg<br>and Mystery</h1>
+                <p
+                    style="color: var(--text-secondary); margin: 30px 0; max-width: 420px; font-size: 17px; line-height: 1.7;">
+                    A surreal three-level game built in Processing, combining click-based combat, projectile shooting,
+                    and platforming inside an illustrated dream world inspired by Yume Nikki. </p>
+                <a href="https://www.youtube.com/watch?v=UGTGHfW47fc" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary"
+                    style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
+                    Demo on YouTube ↗
+                </a>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="P2/P2_Cover.PNG" alt="Dream, Egg and Mystery — Cover">
+                <div class="caption">DREAM, EGG AND MYSTERY — COVER</div>
+            </div>
+        </section>
+
+        <div class="meta-grid reveal">
+            <div class="meta-item">
+                <div class="label">COURSE</div>
+                <div class="value">IAT 167</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">ROLE</div>
+                <div class="value">Design & Development</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">DATE</div>
+                <div class="value">2025</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">TOOLS</div>
+                <div class="value">Processing, Procreate</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">TYPE</div>
+                <div class="value">Solo Project</div>
+            </div>
+        </div>
+
+        <section class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin: 0 0 120px;">
+            <div class="intro-body">
+                <div class="section-eyebrow">Project Structure</div>
+                <h2 class="intro-title">Combining Three Mechanics into One Game</h2>
+                <p>
+                    The final course assignment combined mechanics developed in earlier projects. I rebuilt click-based
+                    combat, projectile shooting, and platforming as three connected levels inside one game.
+                </p>
+                <p>
+                    A central hub connect the levels. Doors unlock in sequence, while additional cracks appear on the
+                    egg after each completed level. </p>
+                <p>
+                    The visual direction was influenced by Yume Nikki, particularly its disconnected spaces, strange
+                    characters, abrupt transitions, and symbolic objects.
+                </p>
+            </div>
+            <div class="intro-image-grid">
+                <div class="hero-image-wrapper img-large">
+                    <img src="P2/A4_level3.PNG" alt="Final Level" style="object-position: center 85%;">
+                    <div class="caption">LEVEL 3 — FINAL SCENE</div>
+                </div>
+                <div class="hero-image-wrapper img-small">
+                    <img src="P2/A4_level1.png" alt="Level 1">
+                    <div class="caption">LEVEL 1 — CLICK TO HUNT</div>
+                </div>
+                <div class="hero-image-wrapper img-small">
+                    <img src="P2/A4_level2.png" alt="Level 2">
+                    <div class="caption">LEVEL 2 — SHOOT THE BOSS</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal" style="margin-bottom: 40px;">
+            <div class="section-eyebrow">Foundation</div>
+            <h2 class="intro-title">Built on Earlier Work</h2>
+            <p style="color: var(--text-secondary); max-width: 640px; line-height: 1.8; margin-top: 16px;">
+                The final game grew from three earlier assignments. Each one introduced a different mechanic, which I
+                later rebuilt as part of the final three-level game. </p>
+        </section>
+
+        <div class="evolution-grid reveal">
+            <div class="evolution-card">
+                <button class="hero-image-wrapper zoomable-image" type="button" data-full="P2/A1.png"
+                    data-cap="Assignment 1 — cursor interaction and visual feedback">
+                    <img src="P2/A1.png" alt="Assignment 1">
+                    <div class="caption">A1 — INTERACTION</div>
+                </button>
+                <div class="evolution-label">Assignment 01</div>
+                <div class="evolution-desc">Built cursor interaction, click effects, animated background elements,
+                    and text rendering.</div>
+            </div>
+            <div class="evolution-card">
+                <button class="hero-image-wrapper zoomable-image" type="button" data-full="P2/A2_1.png"
+                    data-cap="Assignment 2 — cursor-based combat and enemy spawning">
+                    <img src="P2/A2_1.png" alt="Assignment 2" style="object-position: center 50%;">
+                    <div class="caption">A2 — ENEMIES</div>
+                </button>
+                <div class="evolution-label">Assignment 02</div>
+                <div class="evolution-desc">Added random enemy spawning, cursor-based combat, and death effects. These
+                    mechanics became the basis of Level 1.</div>
+            </div>
+            <div class="evolution-card">
+                <button class="hero-image-wrapper zoomable-image" type="button" data-full="P2/A3_6.png"
+                    data-cap="Assignment 3 — projectile shooting, enemy waves, and boss encounter">
+                    <img src="P2/A3_6.png" alt="Assignment 3" style="object-position: center 5%;">
+                    <div class="caption">A3 — SHOOTER + BOSS</div>
+                </button>
+                <div class="evolution-label">Assignment 03</div>
+                <div class="evolution-desc">Added player movement, projectiles, enemy waves, a boss encounter, and
+                    narrative text. These systems became the basis of Level 2.</div>
+            </div>
+            <div class="evolution-card">
+                <button class="hero-image-wrapper zoomable-image" type="button" data-full="P2/A4_bar_2.png"
+                    data-cap="Final project — connected hub and three-level structure">
+                    <img src="P2/A4_bar_2.png" alt="Final Game">
+                    <div class="caption">FINAL — UNIFIED WORLD</div>
+                </button>
+                <div class="evolution-label">Final Project</div>
+                <div class="evolution-desc">Rebuilt the earlier mechanics inside a connected hub and added a third
+                    platforming level, sequential progression, and a shared visual direction.</div>
+            </div>
+        </div>
+
+        <section class="reveal" style="margin: 0 0 40px;">
+            <div class="section-eyebrow">Levels</div>
+            <h2 class="intro-title">Three Mechanics, One Progression Loop</h2>
+        </section>
+
+        <div class="levels-grid reveal">
+            <div class="level-card">
+                <div class="level-card-img"><img src="P2/A4_level1.png" alt="Level 1"></div>
+                <div class="level-card-body">
+                    <div class="level-card-num">LEVEL 01</div>
+                    <h3>The Shallow Gate</h3>
+                    <p>Introduces direct cursor-based combat through fast click interaction, enemy spawning, and
+                        immediate visual feedback.</p>
+                    <span class="level-tag">Click to kill</span>
+                    <span class="level-tag">Enemy spawn</span>
+                    <span class="level-tag">Eye tracking</span>
+                </div>
+            </div>
+            <div class="level-card">
+                <div class="level-card-img"><img src="P2/A4_level2.png" alt="Level 2"></div>
+                <div class="level-card-body">
+                    <div class="level-card-num">LEVEL 02</div>
+                    <h3>The Roaring Bus</h3>
+                    <p>Adds player movement, projectile shooting, enemy waves, and a boss encounter.</p>
+                    <span class="level-tag">Bullet firing</span>
+                    <span class="level-tag">Wave system</span>
+                    <span class="level-tag">Boss fight</span>
+                </div>
+            </div>
+            <div class="level-card">
+                <div class="level-card-img"><img src="P2/A4_level3.PNG" alt="Level 3"></div>
+                <div class="level-card-body">
+                    <div class="level-card-num">LEVEL 03</div>
+                    <h3>The Substances</h3>
+                    <p>The final level removes combat. The player navigates platforms and activates three symbolic
+                        objects to complete the level.</p>
+                    <span class="level-tag">Platformer</span>
+                    <span class="level-tag">Item collection</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="reveal" style="margin: 70px 0 20px;">
+            <div class="section-eyebrow">Playtesting</div>
+            <h2 class="intro-title">Revision after Playtesting</h2>
+            <p style="color: var(--text-secondary); max-width: 680px; line-height: 1.8; margin-top: 16px;">
+                During informal classroom playtesting, classmates and teaching assistants could not always tell whether
+                attacks had registered or when the next level had become available. I strengthened the sound feedback,
+                added volume controls, and revised the conditions that trigger level transitions. </p>
+            <p style="color: var(--text-secondary); max-width: 680px; line-height: 1.8;">
+                I also added sequential door locking so each level only becomes available after the previous one is
+                completed.
+            </p>
+        </section>
+
+        <section class="reveal" style="margin: 70px 0 48px;">
+            <div class="section-eyebrow">Visual Development</div>
+            <h2 class="intro-title">Environments, Characters, and Animated Assets</h2>
+            <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.8; margin-top: 16px;">
+                I illustrated the environments, characters, enemies, objects, and animated elements in Procreate.
+                Consistent textures, colours, and character proportions helped connect three levels with different
+                mechanics.
+            </p>
+        </section>
+
+        <div class="visual-assets-section">
+            <div class="bg-carousel-wrapper">
+                <div class="bg-carousel-wrapper-inner">
+                    <div class="section-eyebrow" style="margin-bottom: 24px;">Environment Artwork</div>
+                    <div class="bg-carousel">
+                        <div class="bg-carousel-track" id="bgTrack">
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_bar_1.png"
+                                    alt="Environment artwork 1" data-full="P2/A4_bar_1.png"
+                                    data-cap="Environment artwork 1" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_level3_bg.PNG"
+                                    alt="Environment artwork 2" data-full="P2/A4_level3_bg.PNG"
+                                    data-cap="Environment artwork 2" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_bedroom.png"
+                                    alt="Environment artwork 3" data-full="P2/A4_bedroom.png"
+                                    data-cap="Environment artwork 3" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_final.png"
+                                    alt="Environment artwork 4" data-full="P2/A4_final.png"
+                                    data-cap="Environment artwork 4" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_level1.png"
+                                    alt="Environment artwork 5" data-full="P2/A4_level1.png"
+                                    data-cap="Environment artwork 5" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_bar_2.png"
+                                    alt="Environment artwork 6" data-full="P2/A4_bar_2.png"
+                                    data-cap="Environment artwork 6" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_level2.png"
+                                    alt="Environment artwork 7" data-full="P2/A4_level2.png"
+                                    data-cap="Environment artwork 7" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_bar_3.png"
+                                    alt="Environment artwork 8" data-full="P2/A4_bar_3.png"
+                                    data-cap="Environment artwork 8" tabindex="0" role="button"></div>
+                            <div class="bg-carousel-slide"><img class="zoomable-asset" src="P2/A4_level3.png"
+                                    alt="Environment artwork 9" data-full="P2/A4_level3.png"
+                                    data-cap="Environment artwork 9" tabindex="0" role="button"></div>
+                        </div>
+                        <button class="bg-carousel-btn bg-carousel-prev" id="bgPrev" aria-label="Previous">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button class="bg-carousel-btn bg-carousel-next" id="bgNext" aria-label="Next">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="bg-carousel-dots" id="bgDots"></div>
+                </div>
+            </div>
+
+            <div class="visual-assets-inner">
+
+                <div class="section-eyebrow" style="margin: 72px 0 28px;">Characters</div>
+                <div class="gif-grid gif-grid-3">
+                    <div class="gif-item">
+                        <img src="P2/A4_character.gif" alt="Character">
+                        <div class="gif-label">Character</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_bartender.gif" alt="Bartender">
+                        <div class="gif-label">Bartender</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_monster.gif" alt="Monster">
+                        <div class="gif-label">Monster</div>
+                    </div>
+                </div>
+
+                <div class="section-eyebrow" style="margin: 56px 0 28px;">Items &amp; Elements</div>
+                <div class="gif-grid gif-grid-6">
+                    <div class="gif-item">
+                        <img src="P2/A4_bear.gif" alt="Bear">
+                        <div class="gif-label">Bear</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_fire.gif" alt="Fire">
+                        <div class="gif-label">Fire</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_heart.gif" alt="Heart">
+                        <div class="gif-label">Heart</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_bird.gif" alt="Bird">
+                        <div class="gif-label">Bird</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_burger.gif" alt="Burger">
+                        <div class="gif-label">Burger</div>
+                    </div>
+                    <div class="gif-item">
+                        <img src="P2/A4_eye.gif" alt="Eye">
+                        <div class="gif-label">Eye</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="reveal" style="margin-bottom: 40px;">
+            <div class="section-eyebrow">Reflection</div>
+            <h2 class="intro-title">Takeaways</h2>
+        </section>
+
+        <div class="takeaways-grid reveal">
+            <div class="takeaway-item">
+                <div class="takeaway-num">IF I DID IT AGAIN — 01</div>
+                <h3>Test Progression Earlier</h3>
+                <p>
+                    I tested individual mechanics before testing the complete game flow. In a future project, I would
+                    test the hub, door order, and level transitions as soon as they are connected. </p>
+            </div>
+            <div class="takeaway-item">
+                <div class="takeaway-num">IF I DID IT AGAIN — 02</div>
+                <h3>Allocate More Time to Interaction Tuning</h3>
+                <p>I spent more time completing visual assets than tuning movement, collision, projectile timing, sound
+                    balance, and hit response. In a future version, I would reserve a separate polish phase for game
+                    feel.</p>
+            </div>
+        </div>
+
+        <div class="reveal" style="text-align: center; margin-bottom: 120px;">
+            <a href="https://www.youtube.com/watch?v=UGTGHfW47fc" target="_blank" rel="noopener noreferrer"
+                class="btn-primary"
+                style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; font-size: 15px;">
+                Watch Full Demo on YouTube ↗
+            </a>
+        </div>
+
+        <section id="connect-footer" class="connect-section reveal">
+            <h2>Let's Connect</h2>
+            <p style="margin: 20px 0 40px; color: var(--text-secondary);">Currently seeking co-op opportunities in
+                interaction design, creative development, and game-related roles.</p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <button class="btn-primary" onclick="
+                navigator.clipboard.writeText('wha75@sfu.ca');
+                this.textContent='Copied ✓';
+                setTimeout(()=>this.textContent='wha75@sfu.ca',2000)
+            ">wha75@sfu.ca</button>
+                <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf" class="btn-secondary"
+                    style="text-decoration: none;">Download Resume</a>
+            </div>
+        </section>
+
+        <footer
+            style="padding: 60px 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-color); margin-top: 0;">
+            <a href="https://www.sfu.ca/" target="_blank" rel="noopener noreferrer"
+                style="text-decoration: none; color: inherit;">SIMON FRASER
+                UNIVERSITY</a>
+            <div style="display: flex; gap: 20px;">
+                <a href="https://www.linkedin.com/in/wenyi-he-4a7356413?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                    style="text-decoration: none; color: inherit;">LINKEDIN</a>
+                <a href="https://www.instagram.com/wzamgqs" target="_blank"
+                    style="text-decoration: none; color: inherit;">INSTAGRAM</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <div class="asset-lightbox" id="assetLightbox" role="dialog" aria-modal="true" aria-label="Expanded project image"
+        aria-hidden="true">
+        <button class="asset-lightbox-close" id="assetLightboxClose" type="button" aria-label="Close">&times;</button>
+        <img id="assetLightboxImg" src="" alt="">
+        <div class="asset-lightbox-cap" id="assetLightboxCap"></div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        window.addEventListener('load', function () {
+            const track = document.getElementById('bgTrack');
+            const prevBtn = document.getElementById('bgPrev');
+            const nextBtn = document.getElementById('bgNext');
+            const dotsContainer = document.getElementById('bgDots');
+            if (!track) return;
+
+            const slides = track.querySelectorAll('.bg-carousel-slide');
+            const total = slides.length;
+            const gap = 24;
+            let current = 0;
+            let visible = 3;   // recomputed responsively below
+            let stops = 1;
+
+            // Visible slide count must match the CSS min-width breakpoints:
+            // 3 on desktop, 2 at <=900px, 1 at <=560px.
+            function getVisible() {
+                const w = window.innerWidth;
+                if (w <= 480) return 1;
+                if (w <= 900) return 2;
+                return 3;
+            }
+
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < stops; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'bg-carousel-dot' + (i === current ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.addEventListener('click', () => goTo(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function goTo(index) {
+                if (index >= stops) index = 0;
+                if (index < 0) index = stops - 1;
+                current = index;
+                const carouselWidth = track.parentElement.offsetWidth;
+                const slideWidth = (carouselWidth - gap * (visible - 1)) / visible + gap;
+                track.style.transform = `translateX(-${current * slideWidth}px)`;
+                dotsContainer.querySelectorAll('.bg-carousel-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === current);
+                });
+            }
+
+            function recalc() {
+                const v = getVisible();
+                const newStops = Math.max(1, total - v + 1);
+                if (v !== visible || newStops !== stops) {
+                    visible = v;
+                    stops = newStops;
+                    if (current >= stops) current = stops - 1;
+                    buildDots();
+                }
+                goTo(current);
+            }
+
+            prevBtn.addEventListener('click', () => goTo(current - 1));
+            nextBtn.addEventListener('click', () => goTo(current + 1));
+            window.addEventListener('resize', recalc);
+            recalc();
+        });
+
+
+        // Shared image lightbox for development images and environment artwork
+        (function () {
+            const box = document.getElementById('assetLightbox');
+            const img = document.getElementById('assetLightboxImg');
+            const cap = document.getElementById('assetLightboxCap');
+            const closeBtn = document.getElementById('assetLightboxClose');
+            let lastTrigger = null;
+            if (!box || !img || !cap || !closeBtn) return;
+            const open = (src, caption, trigger) => {
+                lastTrigger = trigger || null;
+                img.src = src; img.alt = caption || 'Expanded project image'; cap.textContent = caption || '';
+                box.classList.add('open'); box.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden'; closeBtn.focus();
+            };
+            const close = () => {
+                box.classList.remove('open'); box.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = ''; img.src = ''; cap.textContent = '';
+                if (lastTrigger) lastTrigger.focus();
+            };
+            document.querySelectorAll('.zoomable-image, .zoomable-asset').forEach(trigger => {
+                trigger.addEventListener('click', event => {
+                    event.stopPropagation(); open(trigger.dataset.full, trigger.dataset.cap, trigger);
+                });
+            });
+            box.addEventListener('click', event => { if (event.target !== img) close(); });
+            closeBtn.addEventListener('click', close);
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && box.classList.contains('open')) close();
+            });
+        })();
+
+        // Mobile nav drawer toggle (hidden on desktop; no effect there)
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const backdrop = document.querySelector('.nav-backdrop');
+            const nav = document.getElementById('site-nav');
+            if (!toggle || !nav) return;
+            const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
+            const open = () => { document.body.classList.add('nav-open'); toggle.setAttribute('aria-expanded', 'true'); };
+            toggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? close() : open());
+            if (backdrop) backdrop.addEventListener('click', close);
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+        })();
+    </script>
+</body>
+
+</html>
