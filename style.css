@@ -1737,7 +1737,7 @@ footer div:first-child:hover {
    2. Give the existing <nav> an id:  <nav id="site-nav"> ... </nav>
    3. As the LAST <li> inside <nav><ul>, add a drawer Resume link:
         <li class="nav-resume-item">
-          <a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf"
+          <a href="assets/documents/cyan-he-resume.pdf" download="Cyan_He_Resume.pdf"
              class="btn-primary" style="text-decoration:none; margin-top:16px;">
              Resume
           </a>

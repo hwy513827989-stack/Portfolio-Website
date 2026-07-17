@@ -7,7 +7,7 @@ Portfolio website for Cyan He, an Interaction Designer and Creative Technologist
 - CMC Pet
 - The Snow Mountain
 - Dream, Egg and Mystery
-- The Heist *(project page in development)*
+- The Heist (in development)
 
 ## Built With
 
@@ -15,17 +15,16 @@ Portfolio website for Cyan He, an Interaction Designer and Creative Technologist
 - CSS
 - Vanilla JavaScript
 
+## Project Structure
+
+- `assets/site/` — shared site images
+- `assets/documents/` — résumé and downloadable documents
+- `assets/projects/` — project-specific media
+- `assets/about/` — About-page media
+
 ## Local Development
 
-Serve the repository with a local development server rather than opening the HTML files directly.
-
-For example, with Python installed:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open `http://localhost:8000`.
+Run `python3 -m http.server 8000` from the repository root, then open `http://localhost:8000`.
 
 ## Deployment
 
