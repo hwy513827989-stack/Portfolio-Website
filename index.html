@@ -174,45 +174,7 @@
         </footer>
 
     </div>
-
-    <script>
-        // Fade in sections as they scroll into view
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        // P2 gallery — fan out when scrolled into view, collapse when scrolled away
-        const gallery = document.querySelector('.project-row-gallery .project-gallery');
-        if (gallery) {
-            const galleryObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.intersectionRatio > 0.5) {
-                        gallery.classList.add('is-expanded');
-                    } else {
-                        gallery.classList.remove('is-expanded');
-                    }
-                });
-            }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
-            galleryObserver.observe(gallery);
-        }
-
-        // Mobile nav drawer toggle (no effect on desktop, where the toggle is hidden)
-        (function () {
-            const toggle = document.querySelector('.nav-toggle');
-            const backdrop = document.querySelector('.nav-backdrop');
-            const nav = document.getElementById('site-nav');
-            if (!toggle || !nav) return;
-            const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
-            const open = () => { document.body.classList.add('nav-open'); toggle.setAttribute('aria-expanded', 'true'); };
-            toggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? close() : open());
-            if (backdrop) backdrop.addEventListener('click', close);
-            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-        })();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

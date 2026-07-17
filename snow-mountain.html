@@ -14,7 +14,7 @@
     <meta property="og:description"
         content="An interactive ritual system built in Java, using weather and environmental feedback instead of explicit UI.">
     <meta property="og:image" content="https://hwy513827989-stack.github.io/Portfolio-Website/P1/P1_Cover.png">
-    <meta property="og:url" content="https://hwy513827989-stack.github.io/Portfolio-Website/project1.html">
+    <meta property="og:url" content="https://hwy513827989-stack.github.io/Portfolio-Website/snow-mountain.html">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -30,7 +30,7 @@
             <nav id="site-nav">
                 <ul>
                     <li class="nav-active"><a href="index.html#projects">Project</a></li>
-                    <li><a href="resume.html">About</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="#connect-footer">Contact</a></li>
                     <li class="nav-resume-item"><a href="assets/Resume.pdf" download="Cyan_He_Resume.pdf"
                             class="btn-primary" style="text-decoration:none; margin-top:16px;">Resume</a></li>
@@ -280,26 +280,7 @@
         </footer>
 
     </div>
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.08 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Mobile nav drawer toggle (hidden on desktop; no effect there)
-        (function () {
-            const toggle = document.querySelector('.nav-toggle');
-            const backdrop = document.querySelector('.nav-backdrop');
-            const nav = document.getElementById('site-nav');
-            if (!toggle || !nav) return;
-            const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
-            const open = () => { document.body.classList.add('nav-open'); toggle.setAttribute('aria-expanded', 'true'); };
-            toggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? close() : open());
-            if (backdrop) backdrop.addEventListener('click', close);
-            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-        })();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
