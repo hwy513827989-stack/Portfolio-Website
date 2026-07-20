@@ -2544,7 +2544,7 @@ footer div:first-child:hover {
     background: #f7f7f7;
     cursor: zoom-in;
     text-align: left;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4/ 5;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
 }
 
@@ -2586,9 +2586,10 @@ footer div:first-child:hover {
 
 .beyond-grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1fr 1fr ;
     gap: 24px;
     margin-bottom: 100px;
+    align-items: start;  
 }
 
 .beyond-feature,
@@ -2598,7 +2599,7 @@ footer div:first-child:hover {
 }
 
 .beyond-feature {
-    min-height: 500px;
+    min-height: 200px;
     position: relative;
 }
 
@@ -2634,12 +2635,12 @@ footer div:first-child:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2px;
-    min-height: 500px;
+    min-height: 340px;
     background: var(--border-color);
 }
 
 .beyond-photo {
-    min-height: 249px;
+    min-height: 150px;
     overflow: hidden;
     background: #f7f7f7;
 }
@@ -2757,7 +2758,7 @@ footer div:first-child:hover {
 
     .beyond-feature,
     .beyond-photo-grid {
-        min-height: 420px;
+        min-height: 340px;
     }
 }
 
