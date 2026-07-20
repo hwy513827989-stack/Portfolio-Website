@@ -2529,7 +2529,7 @@ footer div:first-child:hover {
 .visual-work-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap:20px;
     margin-bottom: 40px;
 }
 
@@ -2544,14 +2544,8 @@ footer div:first-child:hover {
     background: #f7f7f7;
     cursor: zoom-in;
     text-align: left;
-    aspect-ratio: 4/ 5;
+    aspect-ratio: 3 / 4;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
-}
-
-.visual-work-card:nth-child(1),
-.visual-work-card:nth-child(6) {
-    grid-column: span 2;
-    aspect-ratio: 2 / 1;
 }
 
 .visual-work-card img {
@@ -2634,16 +2628,36 @@ footer div:first-child:hover {
 .beyond-photo-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
+    gap: 12px;
     min-height: 340px;
-    background: var(--border-color);
 }
 
 .beyond-photo {
     min-height: 150px;
     overflow: hidden;
-    background: #f7f7f7;
+    border-radius: 24px; 
 }
+
+.beyond-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.beyond-extra {
+    flex: 1;            
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.beyond-extra img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 
 .visual-lightbox {
     display: none;
@@ -2747,11 +2761,6 @@ footer div:first-child:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .visual-work-card:nth-child(1),
-    .visual-work-card:nth-child(6) {
-        grid-column: span 2;
-    }
-
     .community-image {
         min-height: 360px;
     }
@@ -2766,11 +2775,6 @@ footer div:first-child:hover {
     .visual-work-grid {
         grid-template-columns: 1fr 1fr;
         gap: 12px;
-    }
-
-    .visual-work-card:nth-child(1),
-    .visual-work-card:nth-child(6) {
-        grid-column: span 2;
     }
 
     .visual-lightbox {
